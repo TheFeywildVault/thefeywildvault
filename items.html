@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Feywild Vault</title>
+  <link rel="stylesheet" href="./style/cursebutton.css">
+  <link rel="stylesheet" href="./style/dicegif.css">
+  <link rel="stylesheet" href="./style/rmig.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Optional: Toggle dark mode on load
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+
+  <!-- NAVBAR -->
+  <header class="bg-white dark:bg-gray-800 shadow-md">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        
+       <div class="flex items-center space-x-3">
+          <a href="index.html">
+            <img id="Logo" src="./img/favicon.ico" alt="the outline of a d20 dice" class="w-8 h-8" />
+          </a>
+          <a href="index.html" class="text-2xl font-bold tracking-tight">
+            The Feywild Vault
+          </a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+        <nav class="space-x-4">
+            <a href="./index.html" class="hover:underline">Home</a>
+            <a href="./items.html" class="hover:underline">Items</a>
+            <a href="./inventory.html" class="hover:underline">Inventory</a>
+            <a href="./resources.html" class="hover:underline">Resources</a>
+            <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Support</a>
+        </nav>
+
+          <div class="relative ml-4 z-50">
+            <button id="accountBtn" type="button" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <img id="profilePic" src="./img/default-avatar.jpg" alt="User profile picture" class="w-full h-full object-cover" />
+            </button>
+            <div id="accountMenu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg hidden">
+              <div class="p-4 text-sm text-gray-700 dark:text-gray-200"><span id="displayName">Guest</span></div>
+              <hr class="border-gray-300 dark:border-gray-600" />
+              <a id="loginLink" href="./login.html?redirect=" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Login</a>
+              <a id="signupLink" href="./register.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Sign Up</a>
+              <a id="accountSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Account</a>
+              <a id="friendsSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Friends</a>
+              <a id="courierLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Courier</a>
+              <button id="logoutButton" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Logout</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-20 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
+            Thrandor's Emberforge & Armory
+          </h2>
+      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">Our shop is fully stocked with any equipment you may need on your next adventure, offering millions of unique items for your to explore.</p>
+    </div>
+  </section>
+
+<!-- MAIN CONTENT WITH LEFT COLUMN -->
+<section class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+  
+<!-- Select All/Unselect All Controls -->
+  <aside class="space-y-4">
+    
+   <div class="max-w-md p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md space-y-4">
+
+<!-- Generate Button full width -->
+<div class="mb-4">
+  <button id="generateButton" onclick="runSimulation()"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+    Generate Items
+  </button>
+</div>
+
+<!-- Inputs side-by-side container -->
+<div class="flex space-x-4 mb-4">
+  <!-- Level Dropdown -->
+  <div class="flex-1">
+    <label for="level" class="block text-sm font-medium">Level:</label>
+   <select id="level" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+</select>
+  </div>
+
+  <!-- Number of Items Dropdown -->
+  <div class="flex-1">
+    <label for="runCount" class="block text-sm font-medium">Quantity:</label>
+   <select id="runCount" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+  </div>
+</div>
+
+<!--Curse Button-->
+<div>
+  <button id="curseButton" class="curse-button no-curses" onclick="toggleCurse()">
+    No Curses
+  </button>
+</div>
+
+<p class="underline text-xl mb-1">
+  Item Filters
+  <span class="relative group cursor-pointer">
+    🛈
+    <span id="item-tooltip" class="absolute left-full ml-2 w-max max-w-xs text-sm bg-gray-800 text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 hidden group-hover:block">
+      No Filter Selected
+    </span>
+  </span>
+</p>
+
+<!--
+<div>
+  <button id="StandardHomebrewButton" class="StandardHomebrew-Button no-curses" onclick="toggleStandardHomebrew()">
+    Standard Items
+  </button>
+</div>
+-->
+
+<div class="flex flex-col lg:flex-row gap-2 w-full mb-4">
+  <button onclick="selectAll()" class="flex-1 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+    Select All
+  </button>
+  <button onclick="unselectAll()" class="flex-1 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+    Unselect All
+  </button>
+</div>
+
+<!-- Item Category Dropdown -->
+<div class="w-full" id="itemCategoryDropdown">
+  <label class="block mb-1 text-sm font-medium">Item Category:</label>
+  <button type="button" onclick="toggleDropdown('categoryDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+  <span>Select Categories</span><span class="arrow">&#9662;</span>
+  </button>
+<div id="categoryDropdown" class="hidden mt-2 space-y-1 text-sm">
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Weapons" > Weapons</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Armor" > Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Wondrous Item" > Wondrous Item</label>
+  </div>
+</div>
+
+<!-- Item Type Dropdown -->
+<div class="w-full" id="itemTypeDropdown">
+  <label class="block mb-1 text-sm font-medium">Item Type:</label>
+  <button type="button" onclick="toggleDropdown('typeDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+  <span>Select Types</span><span class="arrow">&#9662;</span>
+  </button>
+   <div id="typeDropdown" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Weapon"  > Simple</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Ranged Weapon"  > Simple Ranged</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Weapon"  > Martial</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Ranged Weapon"  > Martial Ranged</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Light Armor"  > Light</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Medium Armor"  > Medium</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Heavy Armor"  > Heavy</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Shield"  > Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Quiver"  > Quiver</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Garment"  > Garment</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Staff"  > Staff</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Spell Focus"  > Spell Focus</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Container"  > Container</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Instrument"  > Instrument</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Misc."  > Misc.</label>
+  </div>
+</div>
+
+<!-- Item Dropdown -->
+<div class="w-full" id="itemDropdown">
+  <label class="block mb-1 text-sm font-medium">Item:</label>
+  <button type="button" onclick="toggleDropdown('itemOptions', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+  <span>Select Items</span><span class="arrow">&#9662;</span>
+  </button>
+  <div id="itemOptions" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Iron Fist" > Iron Fist</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Club" > Club</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Dagger" > Dagger</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Greatclub" > Greatclub</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Handaxe" > Handaxe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Javelin" > Javelin</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Light Hammer" > Light Hammer</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Mace" > Mace</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Quarterstaff" > Quarterstaff</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Sickle" > Sickle</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Spear" > Spear</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Ranged Weapon" value="Light Crossbow" > Light Crossbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Ranged Weapon" value="Shortbow" > Shortbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Ranged Weapon" value="Sling" > Sling</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Battleaxe" > Battleaxe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Broad Dagger" > Broad Dagger</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Claymore" > Claymore</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Flail" > Flail</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Flamberge" > Flamberge</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Glaive" > Glaive</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Greataxe" > Greataxe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Greatscythe" > Greatscythe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Greatsword" > Greatsword</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Halberd" > Halberd</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Heavy Flail" > Heavy Flail</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Heavy Lance" > Heavy Lance</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Hooked Sword" > Hooked Sword</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Katana" > Katana</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Lance" > Lance</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Long Spear" > Long Spear</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Longsword" > Longsword</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Maul" > Maul</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Morningstar" > Morningstar</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Pike" > Pike</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Rapier" > Rapier</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Scimitar" > Scimitar</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Scythe" > Scythe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Shortsword" > Shortsword</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Spiked Chain" > Spiked Chain</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Trident" > Trident</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="War Pick" > War Pick</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Waraxe" > Waraxe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Warhammer" > Warhammer</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Whip" > Whip</label>    
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Bolas" > Bolas</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Weapon" value="Boomerang" > Boomerang</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Blowgun" > Blowgun</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Hand Crossbow" > Hand Crossbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Heavy Crossbow" > Heavy Crossbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Crossbow Ballista" > Crossbow Ballista</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Longbow" > Longbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Recurve Bow" > Recurve Bow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Martial Ranged Weapon" value="Greatbow" > Greatbow</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Light Armor" value="Padded Armor" > Padded Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Light Armor" value="Quilted Armor" > Quilted Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Light Armor" value="Leather Armor" > Leather Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Light Armor" value="Studded Leather Armor" > Studded Leather</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Light Armor" value="Plated Leather Armor" > Plated Leather</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Hide Armor" > Hide Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Chain Shirt" > Chain Shirt</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Scale Mail" > Scale Mail</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Breastplate" > Breastplate</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Brigandine Armor" > Brigandine Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Medium Armor" value="Half Plate" > Half Plate</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Heavy Armor" value="Ringmail" > Ringmail</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Heavy Armor" value="Chain Mail" > Chain Mail</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Heavy Armor" value="Splint Armor" > Splint Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Heavy Armor" value="Banded Armor" > Banded Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Heavy Armor" value="Plate Armor" > Plate Armor</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Shield" value="Buckler Shield" > Buckler Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Shield" value="Standard Shield" > Standard Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Shield" value="Aspis Shield" > Aspis Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Shield" value="Large Shield" > Large Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Shield" value="Tower Shield" > Tower Shield</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Helmet" > Helmet</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Crown" > Crown</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Ring" > Ring</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Hood" > Hood</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Cloak" > Cloak</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Robe" > Robe</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Cape" > Cape</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Amulet" > Amulet</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Medallion" > Medallion</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Necklace" > Necklace</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Talisman" > Talisman</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Circlet" > Circlet</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Headband" > Headband</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Greaves" > Greaves</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Pauldrons" > Pauldrons</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Gauntlets" > Gauntlets</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Belt" > Belt</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Boots" > Boots</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Gloves" > Gloves</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Garment" value="Bracers" > Bracers</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Staff" value="Standard Staff" > Standard Staff</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Staff" value="Longstaff" > Longstaff</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Staff" value="Greatstaff" > Greatstaff</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Quiver" value="Small Quiver" > Small Quiver</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Quiver" value="Medium Quiver" > Medium Quiver</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Quiver" value="Large Quiver" > Large Quiver</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Spell Focus" value="Orb" > Orb</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Spell Focus" value="Grimoire" > Grimoire</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Spell Focus" value="Wand" > Wand</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Container" value="Flask" > Flask</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Container" value="Decanter" > Decanter</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Container" value="Canteen" > Canteen</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Lyre" > Lyre</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Lute" > Lute</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Harp" > Harp</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Flute" > Flute</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Pan Flute" > Pan Flute</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Mandolin" > Mandolin</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Viol" > Viol</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Instrument" value="Dulcimer" > Dulcimer</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Misc." value="Key" > Key</label>
+    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Misc." value="Charm" > Charm</label>
+    </div>
+</div>
+</aside>
+
+ <!-- Item Result Output -->
+<div class="md:col-span-3 px-4">
+  <div id="result" class="parchment-bg text-black p-4 rounded shadow-md w-full" style="line-height: 1; text-indent: 2px; min-height: 550px;">
+  <p id="placeholder-text" class="text-gray-500 italic">- Click "Generate" to discover amazing magic items -</p>
+  </div>
+</div>
+
+  <!-- Loading GIF -->
+  <div id="gifDisplayContainer" class="hidden mt-4">
+    <img src="./gif/dice.GIF" alt="Loading" id="loadingGif">
+  </div>
+
+  <!-- Optional Text beneath the generator-->
+  <div class="mt-8 text-gray-600 dark:text-gray-300">
+   
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 items-start">
+  
+        <!-- Branding (2/5 columns) -->
+        <div class="flex items-start space-x-4 md:col-span-2">
+          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-1" />
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Feywild Vault</h4>
+            <p class="text-sm">Tools and content for D&D adventurers who wander the enchanted paths of the Feywild.</p>
+          </div>
+        </div>
+  
+        <!-- Link Sections (3/5 columns, grid distributes space evenly) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:col-span-3 gap-8">
+  
+          <!-- Explore -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Explore</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li><a href="./items.html" class="hover:underline">Items</a></li>
+              <li><a href="./resources.html" class="hover:underline">Resources</a></li>
+            </ul>
+          </div>
+  
+          <!-- Support -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Support</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Patreon</a></li>
+              <li><a href="https://www.stickermule.com/2e58deb5953f134" class="hover:underline">Stickers</a></li>
+            </ul>
+          </div>
+  
+          <!-- Community -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Community</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.facebook.com/profile.php?id=100092475161267" class="hover:underline">Facebook</a></li>
+              <li><a href="https://www.instagram.com/thefeywildvault/" class="hover:underline">Instagram</a></li>
+              <li><a href="mailto:thefeywildvault@gmail.com" class="hover:underline">Contact</a></li>
+            </ul>
+          </div>
+  
+        </div>
+      </div>
+  
+    <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
+        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="accountModal"
+     class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative">
+      <button id="closeAccountModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Account Settings</h2>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Profile Picture</label>
+    <input type="file" id="avatarUpload" accept="image/*" class="mb-2" />
+    <div class="relative w-40 h-40 rounded-full overflow-hidden border-2 border-purple-500 mx-auto">
+      <img id="avatarPreview" class="w-full h-full object-cover object-center" src="./img/default-avatar.jpg" />
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Username</label>
+    <input id="accountUsername"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            readonly />
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Display Name</label>
+    <input id="accountDisplayName"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 text-gray-900 dark:text-white" />
+  </div>
+
+  <button id="saveAccountChanges"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+    Save Changes
+  </button>
+
+  <p id="accountSaveConfirm" class="text-green-500 mt-3 hidden">Changes saved successfully!</p>
+  <br><br>
+  <h2 class="text-xl font-semibold mb-4">Patreon</h2>
+  <div class="mb-4">
+
+    <!--Patreon Status-->
+    <div id="patreonStatus"
+        class="text-sm text-gray-900 dark:text-white mb-2">
+    </div>
+
+    <!-- Link Button -->
+    <a id="patreonLinkBtn"
+      href="/api/patreon/link"
+      class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
+      <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
+      Link Patreon Account
+    </a>
+
+    <!-- Unlink Button -->
+    <button id="patreonUnlinkBtn" class="px-4 py-2 bg-red-700 rounded hidden">Unlink</button>
+  
+  </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div id="friendsModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+      <button id="closeFriendsModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Manage Friends</h2>
+
+      <div class="mb-4">
+        <label for="friendSearchInput" class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Search by Username</label>
+        <div class="flex space-x-2">
+          <input id="friendSearchInput" type="text" placeholder="Enter username"
+                 class="flex-grow px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100" />
+          <button id="friendSearchBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Add Friend</button>
+        </div>
+        <p id="friendSearchMessage" class="mt-2 text-sm text-red-500 hidden"></p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-2">Your Friends</h3>
+      <ul id="friendsList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Friends list items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="shareModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 rounded p-6 max-w-md w-full relative">
+    <button id="closeShareModal"
+            class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+      &times;
+    </button>
+    <h2 class="text-lg font-semibold mb-4">Share with a friend</h2>
+    <ul id="shareFriendsList" class="space-y-2 max-h-60 overflow-auto"></ul>
+  </div>
+</div>
+
+<!-- Courier Modal -->
+<div id="courierModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+
+      <!-- X Close Button like friendsModal -->
+      <button id="closeCourierModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+
+      <h2 class="text-xl font-semibold mb-4">Courier Inbox</h2>
+
+      <ul id="courierInboxList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Courier inbox items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Item Shared Popup -->
+<div id="itemSharedPopup" class="fixed top-[280px] left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50 hidden transition-all duration-300">
+  Item shared successfully!
+</div>
+
+<script>
+  function toggleDropdown(id) {
+    const dropdown = document.getElementById(id);
+    dropdown.classList.toggle('hidden');
+  }
+
+  document.getElementById("patreonUnlinkBtn").addEventListener("click", async () => {
+  const res = await fetch("/api/patreon/unlink", { method: "POST" });
+  const json = await res.json();
+
+  if (json.success) {
+    window.location.reload();
+  } else {
+    alert("Failed to unlink Patreon");
+  }
+});
+
+</script>
+
+<script src="./js-code/account.js" defer></script>
+<script src="./js-code/item-toggle-buttons.js" defer></script>
+<script src="./js-code/item-filter-tooltip.js" defer></script>
+<script src="./js-code/rmig.js" defer></script>
+<script src="./js-code/item-save.js" defer></script>
+<script src="./js-code/item-share.js" defer></script>
+<script src="./js-code/courier.js" defer></script>
+<script src="./js-code/item-type-selection.js" defer></script>
+<script src="favicon.js" defer></script>
+
+</body>
+</html>

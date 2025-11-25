@@ -1,0 +1,168 @@
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .rarity {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-indent: 0px;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .output-line {
+    margin: 5px 0;
+    line-height: 1.2;
+  }
+
+  input[type="number"] {
+    width: 50px;
+  }
+
+  .Common { color: black; }
+  .Uncommon { color: green; }
+  .Rare { color: blue; }
+  .Very.Rare { color: purple; }
+  .Legendary { color: orange; }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .input-container label {
+    margin-right: 10px;
+  }
+
+  .item-result {
+    background-color: #fff5e6; /* light parchment */
+    border-left: 5px solid #8d4b00;
+    padding: 10px 0px 10px 10px;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .item-result {
+  background-color: #fff5e6; /* light parchment */
+  border-left: 5px solid #8d4b00;
+  padding: 10px 0px 10px 10px; /* top, right, bottom, left */
+  margin-top: 10px;
+  text-align: left;
+}
+
+.parchment-bg {
+  background:
+    #f4ecd8 url('https://cdn.pixabay.com/photo/2015/06/19/21/24/old-814651_960_720.jpg') center center / cover no-repeat;
+  color: #2e2b20; /* Dark text for contrast */
+  font-family: 'Georgia', serif;
+  border: 1px solid #a68b5b;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#placeholder-text {
+  color: #3f29008f; /* Tailwind's gray-500 */
+  font-style: italic;
+  font-size: 2rem; /* roughly text-xl */
+  align-items: center;         /* vertical centering */
+  justify-content: center;     /* horizontal centering */
+  text-align: center;
+  padding: 150px 0px 10px 10px; /* top, right, bottom, left */
+}
+
+.remove-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;  /* Move to top right corner */
+  background-color: rgba(128, 128, 128, 0.2);
+  color: #aaa;
+  font-weight: bold;
+  border: none;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.remove-button:hover {
+  background-color: rgba(128, 128, 128, 0.4);
+  color: #fff;
+}
+
+details[open] summary::after {
+  content: "▲";
+  float: right;
+}
+details summary::after {
+  content: "▼";
+  float: right;
+}
+
+  /* Custom brown tones */
+  
+  .brown-bg-light {
+    background-color: #D8C3A5; /* slightly darker tan */
+  }
+  .brown-bg-dark {
+    background-color: #6B4C31; /* darker brown for summary */
+  }
+  .brown-text-dark {
+    color: #3E2F1C; /* dark brown text */
+  }
+  .brown-text-light {
+    color: #F5E8D0; /* light text for dark bg */
+  }
+
+  #weapon-section,
+  #armor-section,
+  #wondrous-section,
+  #scroll-section {
+    min-height: 100px;
+    background-color: #d8c3a5; /* brown-bg-light */
+    padding: 1.5rem;
+    border-radius: 0 0 1rem 1rem;
+  }
+  .empty-placeholder {
+    color: #6b4c31; /* brown text */
+    font-style: italic;
+    text-align: center;
+  }
+
+  .property-tooltip-container, .mastery-tooltip-container {
+    position: relative;
+    cursor: help;
+    color: #3b82f6; /* Tailwind blue-500 */
+  }
+
+  .property-tooltip-container .tooltip-text,
+  .mastery-tooltip-container .tooltip-text {
+    visibility: hidden;
+    width: max-content;
+    max-width: 320px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 99;
+    bottom: 125%; /* above the text */
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .property-tooltip-container:hover .tooltip-text,
+  .mastery-tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }

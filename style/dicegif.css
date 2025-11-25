@@ -1,0 +1,30 @@
+#gifDisplayContainer {
+  margin-top: 350px; /* Space between button and GIF */
+  position: absolute; /* Positioning relative to the button */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-12%); /* Center horizontally */
+  z-index: 2; /* Higher z-index to overlay */
+}
+
+#loadingGif {
+  transform: scale(0.2); /* Scale down the GIF */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 700px) {
+  #gifDisplayContainer {
+    margin-top: 20px; /* Space between button and GIF */
+    position: absolute; /* Positioning relative to the button */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-46%); /* Center horizontally */
+    z-index: 2; /* Higher z-index to overlay */
+  }
+  
+  #loadingGif {
+      transform: scale(0.05); /* Smaller GIF for mobile */
+  }
+}

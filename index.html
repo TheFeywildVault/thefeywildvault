@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Feywild Vault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+  <style>
+    @layer utilities {
+      @keyframes colorFade {
+        0%   { color: #9333ea; }
+        25%  { color: #3b82f6; }
+        50%  { color: #10b981; }
+        75%  { color: #ec4899; }
+        100% { color: #9333ea; }
+      }
+      .animate-color-fade {
+        animation: colorFade 8s infinite ease-in-out;
+      }
+    }
+
+    html, body {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body class="h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans flex flex-col">
+
+  <!-- PAGE WRAPPER -->
+  <div class="flex-grow flex flex-col">
+
+    <!-- NAVBAR -->
+<header class="bg-white dark:bg-gray-800 shadow-md">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        
+         <div class="flex items-center space-x-3">
+          <a href="index.html">
+            <img id="Logo" src="./img/favicon.ico" alt="the outline of a d20 dice" class="w-8 h-8" />
+          </a>
+          <a href="index.html" class="text-2xl font-bold tracking-tight">
+            The Feywild Vault
+          </a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+        <nav class="space-x-4">
+            <a href="#" class="hover:underline">Home</a>
+            <a href="./items.html" class="hover:underline">Items</a>
+            <a href="./inventory.html" class="hover:underline">Inventory</a>
+            <a href="./resources.html" class="hover:underline">Resources</a>
+            <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Support</a>
+        </nav>
+
+          <div class="relative ml-4 z-50">
+            <button id="accountBtn" type="button" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <img id="profilePic" src="./img/default-avatar.jpg" alt="User profile picture" class="w-full h-full object-cover" />
+            </button>
+            <div id="accountMenu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg hidden">
+              <div class="p-4 text-sm text-gray-700 dark:text-gray-200"><span id="displayName">Guest</span></div>
+              <hr class="border-gray-300 dark:border-gray-600" />
+              <a id="loginLink" href="./login.html?redirect=" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Login</a>
+              <a id="signupLink" href="./register.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Sign Up</a>
+              <a id="accountSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Account</a>
+              <a id="friendsSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Friends</a>
+              <a id="courierLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Courier</a>
+              <button id="logoutButton" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Logout</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</header>
+
+    <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-20 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
+            Discover the Magic of The Feywild Vault
+        </h2>
+      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">
+            Curated resources, magical items, creatures, and generators for your tabletop adventures.
+      </p>
+    </div>
+  </section>
+
+    <!-- FEATURED TOOLS -->
+    <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl font-semibold mb-8 text-center text-purple-700 dark:text-purple-300">Featured Tools</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  
+        <!-- Card 1 - Gold Glow -->
+        <a href="./items.html" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-yellow-300 dark:border-yellow-500 hover:shadow-yellow-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-yellow-700 dark:text-yellow-300 mb-2">Magic Item Generator</h4>
+          <p class="text-gray-600 dark:text-gray-400">Generate unique magic items tailored just for you.</p>
+        </a>
+
+        <!-- Card 2 - Red Glow -->
+        <a href="./chaos.html" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-fuschia-500 dark:border-fuchsia-500 hover:shadow-fuchsia-500/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-red-700 dark:text-fuchsia-500 mb-2">Wild Surge</h4>
+          <p class="text-gray-600 dark:text-gray-400">Magic in the Feywild can be quite chaotic, how will your spells be affected?</p>
+        </a>
+  
+        <!-- Card 3 - Green Glow -->
+        <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-green-300 dark:border-green-500 hover:shadow-green-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-green-700 dark:text-green-300 mb-2">Potions - Coming Soon</h4>
+          <p class="text-gray-600 dark:text-gray-400">Browse our selection of unqiuely crafted brews for all your needs.</p>
+        </a>
+  
+        <!-- Card 4 - Blue Glow (Optional Extra Card) -->
+        <a href="./scrolls.html" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-blue-300 dark:border-blue-500 hover:shadow-blue-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-blue-700 dark:text-blue-300 mb-2">The Library</h4>
+          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+        </a>
+
+        <!-- Card 5 - Orange Glow -->
+        <a href="./ammunition.html" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-orange-300 dark:border-orange-500 hover:shadow-orange-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-orange-700 dark:text-orange-300 mb-2">Ammunition</h4>
+          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+        </a>
+
+         <!-- Card 6 -->
+        <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-purple-300 dark:border-purple-500 hover:shadow-purple-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-purple-700 dark:text-purple-300 mb-2">Encounters - Coming Soon</h4>
+          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+        </a>
+
+         <!-- Card 7 - Red Glow -->
+        <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-red-300 dark:border-red-500 hover:shadow-red-400/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-red-700 dark:text-red-300 mb-2">Monsters - Coming Soon</h4>
+          <p class="text-gray-600 dark:text-gray-400">From easy to deadly, roll for your next combat adversary.</p>
+        </a>
+
+           <!-- Card 8 -->
+        <a href="./deck-of-many.html" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-amber-500 dark:border-magenta-500 hover:shadow-amber-500/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-amber-500 dark:text-amber-500 mb-2">Deck of Many Things</h4>
+          <p class="text-gray-600 dark:text-gray-400">Test your luck and let the fates decide your future.</p>
+        </a>
+
+         <!-- Card 9 -->
+        <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-rose-500 dark:border-rose-500 hover:shadow-rose-500/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-rose-700 dark:text-rose-400 mb-2">Player & NPC - Coming Soon</h4>
+          <p class="text-gray-600 dark:text-gray-400">Meet your next character or an NPC you find on your travels.</p>
+        </a>
+
+          <!-- Card 10 -->
+        <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-cyan-500 dark:border-cyan-500 hover:shadow-cyan-500/50 hover:shadow-xl transition-all duration-300">
+          <h4 class="text-xl font-bold text-cyan-500 dark:text-cyan-500 mb-2">Loot - Coming Soon</h4>
+          <p class="text-gray-600 dark:text-gray-400">Combining multiple generators into one for a quick and easy place to create rewards for quests and combat.</p>
+        </a>
+  
+      </div>
+    </div>
+  </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 items-start">
+  
+        <!-- Branding (2/5 columns) -->
+        <div class="flex items-start space-x-4 md:col-span-2">
+          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-1" />
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Feywild Vault</h4>
+            <p class="text-sm">Tools and content for D&D adventurers who wander the enchanted paths of the Feywild.</p>
+          </div>
+        </div>
+  
+        <!-- Link Sections (3/5 columns, grid distributes space evenly) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:col-span-3 gap-8">
+  
+          <!-- Explore -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Explore</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li><a href="./items.html" class="hover:underline">Items</a></li>
+              <li><a href="./resources.html" class="hover:underline">Resources</a></li>
+            </ul>
+          </div>
+  
+          <!-- Support -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Support</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Patreon</a></li>
+              <li><a href="https://www.stickermule.com/2e58deb5953f134" class="hover:underline">Stickers</a></li>
+            </ul>
+          </div>
+  
+          <!-- Community -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Community</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.facebook.com/profile.php?id=100092475161267" class="hover:underline">Facebook</a></li>
+              <li><a href="https://www.instagram.com/thefeywildvault/" class="hover:underline">Instagram</a></li>
+              <li><a href="mailto:thefeywildvault@gmail.com" class="hover:underline">Contact</a></li>
+            </ul>
+          </div>
+  
+        </div>
+      </div>
+  
+      <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
+        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+  <!-- MODAL -->
+  <div id="accountModal"
+     class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative">
+      <button id="closeAccountModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Account Settings</h2>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Profile Picture</label>
+    <input type="file" id="avatarUpload" accept="image/*" class="mb-2" />
+    <div class="relative w-40 h-40 rounded-full overflow-hidden border-2 border-purple-500 mx-auto">
+      <img id="avatarPreview" class="w-full h-full object-cover object-center" src="./img/default-avatar.jpg" />
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Username</label>
+    <input id="accountUsername"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            readonly />
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Display Name</label>
+    <input id="accountDisplayName"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 text-gray-900 dark:text-white" />
+  </div>
+
+  <button id="saveAccountChanges"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+    Save Changes
+  </button>
+
+  <p id="accountSaveConfirm" class="text-green-500 mt-3 hidden">Changes saved successfully!</p>
+  <br><br>
+  <h2 class="text-xl font-semibold mb-4">Patreon</h2>
+  <div class="mb-4">
+
+    <!--Patreon Status-->
+    <div id="patreonStatus"
+        class="text-sm text-gray-900 dark:text-white mb-2">
+    </div>
+
+    <!-- Link Button -->
+    <a id="patreonLinkBtn"
+      href="/api/patreon/link"
+      class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
+      <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
+      Link Patreon Account
+    </a>
+
+    <!-- Unlink Button -->
+    <button id="patreonUnlinkBtn" class="px-4 py-2 bg-red-700 rounded hidden">Unlink</button>
+  
+  </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div id="friendsModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+      <button id="closeFriendsModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Manage Friends</h2>
+
+      <div class="mb-4">
+        <label for="friendSearchInput" class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Search by Username</label>
+        <div class="flex space-x-2">
+          <input id="friendSearchInput" type="text" placeholder="Enter username"
+                 class="flex-grow px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100" />
+          <button id="friendSearchBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Add Friend</button>
+        </div>
+        <p id="friendSearchMessage" class="mt-2 text-sm text-red-500 hidden"></p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-2">Your Friends</h3>
+      <ul id="friendsList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Friends list items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Courier Modal -->
+<div id="courierModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+
+      <!-- X Close Button like friendsModal -->
+      <button id="closeCourierModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+
+      <h2 class="text-xl font-semibold mb-4">Courier Inbox</h2>
+
+      <ul id="courierInboxList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Courier inbox items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="./js-code/account.js" defer></script>
+<script src="./js-code/courier.js" defer></script>
+<script src="./js-code/item-save.js" defer></script>
+<script src="./js-code/item-share.js" defer></script>
+
+</body>
+</html>

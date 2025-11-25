@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - The Feywild Vault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+
+  <form id="registerForm" class="bg-gray-800 p-8 rounded-lg w-80">
+    <h2 class="text-2xl mb-6 font-bold text-center">Create Account</h2>
+<input
+  id="username"
+  name="username"
+  placeholder="Username"
+  required
+  class="w-full p-3 mb-1 rounded text-black"
+/>
+<small id="usernameError" class="text-red-500 italic block mb-3"></small>
+
+
+<input
+  id="displayName"
+  name="displayName"
+  placeholder="Display Name (optional)"
+  class="w-full p-3 mb-4 rounded text-black"
+/>
+
+<input
+  id="password"
+  name="password"
+  type="password"
+  placeholder="Password"
+  required
+  class="w-full p-3 mb-6 rounded text-black"
+/>
+    <button
+      type="submit"
+      class="w-full bg-purple-600 hover:bg-purple-700 p-3 rounded font-semibold"
+    >
+      Sign Up
+    </button>
+    <p class="mt-4 text-center text-gray-400">
+      Already have an account? <a href="/login.html" class="underline">Login</a>
+    </p>
+  </form>
+
+<script src="./js-code/register.js" defer></script>
+
+</body>
+</html>

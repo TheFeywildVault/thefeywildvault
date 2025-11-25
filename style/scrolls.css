@@ -1,0 +1,54 @@
+.scroll-result {
+  background-color: #fff5e6; /* light parchment */
+  border-left: 5px solid #8d4b00;
+  padding: 15px 0px 10px 15px; /* top, right, bottom, left */
+  margin-top: 10px;
+  text-align: left;
+  line-height: 1.5; /* Adjust this value to control spacing between lines */
+}
+
+.mishap {
+  background-color: #fff5e6; /* light parchment */
+  border-left: 5px solid #e53e3e;
+  padding: 20px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.mishap-name {
+  display: block;
+  font-size: 2rem; /* larger text for name */
+  color: #c53030; /* bold red */
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.mishap-effect {
+  display: block;
+  font-size: 1.3rem;
+  color: #742a2a;
+  line-height: 1.4; /* Reduced line spacing */
+}
+
+.hide-effect .effect-text {
+  display: none;
+}
+
+.button-inactive {
+  background-color: #4a5568 !important; /* gray-700 */
+  cursor: pointer;
+}
+
+.button-inactive:hover {
+  background-color: #2d3748 !important; /* darker gray */
+}
+
+#placeholder-text {
+  color: #3f29008f; /* Tailwind's gray-500 */
+  font-style: italic;
+  font-size: 2rem; /* roughly text-xl */
+  align-items: center;         /* vertical centering */
+  justify-content: center;     /* horizontal centering */
+  text-align: center;
+  padding: 300px 0px 10px 10px; /* top, right, bottom, left */
+}

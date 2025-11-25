@@ -1,0 +1,77 @@
+.parchment-bg {
+  background:
+    #f4ecd8 url('https://cdn.pixabay.com/photo/2015/06/19/21/24/old-814651_960_720.jpg') center center / cover no-repeat;
+  color: #2e2b20; /* Dark text for contrast */
+  font-family: 'Georgia', serif;
+  border: 1px solid #a68b5b;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#placeholder-text {
+  color: #3f29008f; /* Tailwind's gray-500 */
+  font-style: italic;
+  font-size: 3rem; /* roughly text-xl */
+  align-items: center;         /* vertical centering */
+  justify-content: center;     /* horizontal centering */
+  text-align: center;
+  padding: 10px 0px 10px 10px; /* top, right, bottom, left */
+}
+
+#chaosResult {
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+#chaosNameWrapper {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+#chaosResult strong {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Use the custom property to set the underline width */
+#chaosResult strong::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: var(--underline-width);
+  background-color: rgb(165, 112, 42);
+  border-radius: 1px;
+}
+
+.vbad-color {
+  color: #8B0000;
+}
+
+.bad-color {
+  color: #c52747; /* firebrick red */
+}
+
+.mod-color {
+  color: #3a7700; /* chocolate/orange-ish */
+}
+
+.good-color {
+  color: #0055b6;
+}
+
+.vgood-color {
+  color: #9700a5;
+}
+
+.trigger-list {
+  padding-left: 0.25rem;   /* Reduce left padding */
+  margin-left: -1.75rem;   /* Pull list left to align "X" with other bullets */
+}

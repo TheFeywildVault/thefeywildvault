@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Feywild Vault</title>
+  <link rel="stylesheet" href="./style/chaos.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Optional: Toggle dark mode on load
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+
+  <!-- NAVBAR -->
+  <header class="bg-white dark:bg-gray-800 shadow-md">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        
+         <div class="flex items-center space-x-3">
+          <a href="index.html">
+            <img id="Logo" src="./img/favicon.ico" alt="the outline of a d20 dice" class="w-8 h-8" />
+          </a>
+          <a href="index.html" class="text-2xl font-bold tracking-tight">
+            The Feywild Vault
+          </a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+        <nav class="space-x-4">
+            <a href="./index.html" class="hover:underline">Home</a>
+            <a href="./items.html" class="hover:underline">Items</a>
+            <a href="./inventory.html" class="hover:underline">Inventory</a>
+            <a href="./resources.html" class="hover:underline">Resources</a>
+            <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Support</a>
+        </nav>
+
+          <div class="relative ml-4 z-50">
+            <button id="accountBtn" type="button" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <img id="profilePic" src="./img/default-avatar.jpg" alt="User profile picture" class="w-full h-full object-cover" />
+            </button>
+            <div id="accountMenu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg hidden">
+              <div class="p-4 text-sm text-gray-700 dark:text-gray-200"><span id="displayName">Guest</span></div>
+              <hr class="border-gray-300 dark:border-gray-600" />
+              <a id="loginLink" href="./login.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Login</a>
+              <a id="signupLink" href="./register.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Sign Up</a>
+              <a id="accountSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Account</a>
+              <a id="friendsSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Friends</a>
+              <a id="courierLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Courier</a>
+              <button id="logoutButton" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Logout</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-12 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
+            Let Chaos Rain
+          </h2>
+      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">Wacky & fantastically chaotic random effect for when you spell do awry.</p>
+    </div>
+  </section>
+
+<!-- TEXT INFO SECTION -->
+<section class="container mx-auto px-4 pb-6 text-left">
+ <div class="md:col-span-3 px-4">
+    <h3 class="text-2xl font-semibold mb-2">
+    Modified Wild Magic
+  <span class="text-sm text-blue-500 italic align-middle cursor-help ml-2"
+  title="These variant rules are intended to give DMs more control over the chaos and scale with campaign progression. Moderate effects will appear at 50%, impactful effects both good and bad at 22%, and extreme effects both good and bad at 2.5%. Enabling the filters for player levels 1-4 will restrict the effects to just moderate, levels 5-9 to 60% moderate and 20% impactful (good/bad), and levels 10-20 to base percentile, no restrictions imposed. Enabling the filters for spell levels 1-2 will restrict the effects to just moderate, levels 3-4 to 40% mdoerate and 30% impactul (good/bad), and levels 5-9 to 20% moderate, 37.5% impactful (good/bad), and 2.5% extreme (good/bad).">
+    (For the DM)
+  </span>
+</h3>
+    <p class="text-gray-700 dark:text-gray-300">
+    <b>Wild Magic Surge:</b>
+    With each subsequent spell you cast, the maximum threshold decreases by one that will result in a triggered wild magic effect. 
+    Once a wild magic surge triggers the maximum threshold is reset.
+    Ex. On your first spell if you roll 1d20 and get a 9, needing a 20, the wild magic surge will NOT trigger.
+    On your second spell if you roll 1d20 and get a 12, needing a 19 or 20, the wild magic surge will NOT trigger.
+    On your third spell if you roll 1d20 and get an 18, needing a 18-20, the wild magic surge WILL trigger.
+    The threshold is then reset back to 20 for your next spell
+    <br><br>
+    <b>Bend Luck:</b>
+    You can either spend one sorcery point OR roll on the Wild Magic Surge table to activate this ability.
+    <br><br>
+    <b>Optional Filters:</b> 
+    These filters can mitigate the possible wild magic effects by filtering them based on either player or spell level. 
+    When using the filters, at lower levels you will trigger effects of little consequence or power, removing the possibility of overpowered or deadly effects early in the campaign. 
+    As the levels increase the more powerful and more detrimental the effects will become.
+    Increasing player level grants access to an increasing number of effects, encompassing those from prior levels. 
+    Increasing spell level alters the severity of the effect. 
+    Casting a lower level spell will always result in a inconsequential effect and casting a higher level spell will always result in a more drastic result.
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT WITH LEFT COLUMN -->
+<section class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+  
+  <!-- Result Output (moved higher in the DOM) -->
+  <div class="md:col-span-4">
+    <!-- Generate Button full width above result -->
+<div class="mb-4 flex justify-center gap-x-4">
+<button id="chaosfilterButton" onclick="toggleChaos()"
+  class="w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
+  True Chaos
+</button>
+  
+<select id="levelDropdown"
+  class="w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
+  <option value="">No filter active</option>
+</select>
+
+  <button id="generateChaosButton" onclick="generatechaos()"
+          class="w-64 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-4 rounded">
+    Generate Chaos
+  </button>
+
+  <button id="generateControlledChaosButton" onclick="generatecontrolledchaos()"
+    class="w-64 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-4 rounded">
+    Controlled Chaos
+  </button>
+
+  <button id="clearChaosButton" onclick="clearTally()" class="w-64 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
+    Clear All Effects
+  </button> 
+</div>
+
+    <div id="chaosResult" class="parchment-bg text-black px-10 py-6 rounded shadow-md w-full text-center text-xl leading-snug min-h-[500px] flex flex-col justify-center"
+         style="line-height: 1.25; text-indent: 2px; min-height: 500px;">
+      <p id="placeholder-text" class="text-gray-500 italic">- Click "Generate" to find chaos -</p>
+    </div>
+  </div>
+
+<!-- Tally Section (Hidden by Default) -->
+<div class="md:col-span-4">
+  <div id="effectTally"
+       class="hidden text-left parchment-bg text-black px-10 py-4 rounded shadow-md w-full text-center text-base leading-snug mt-4"
+       style="line-height: 1; text-indent: 2px;">
+  </div>
+</div>
+
+  <!-- Loading GIF -->
+  <div id="gifDisplayContainer" class="hidden mt-4 md:col-span-4">
+    <img src="./gif/dice.GIF" alt="Loading" id="loadingGif">
+  </div>
+
+  <!-- Optional Text -->
+  <div class="mt-8 text-gray-600 dark:text-gray-300 md:col-span-4">
+    <!-- Add optional content here -->
+  </div>
+</section>
+
+ 
+<!-- FOOTER -->
+<footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 items-start">
+  
+        <!-- Branding (2/5 columns) -->
+        <div class="flex items-start space-x-4 md:col-span-2">
+          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-1" />
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Feywild Vault</h4>
+            <p class="text-sm">Tools and content for D&D adventurers who wander the enchanted paths of the Feywild.</p>
+          </div>
+        </div>
+  
+        <!-- Link Sections (3/5 columns, grid distributes space evenly) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:col-span-3 gap-8">
+  
+          <!-- Explore -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Explore</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li><a href="./items.html" class="hover:underline">Items</a></li>
+              <li><a href="./resources.html" class="hover:underline">Resources</a></li>
+            </ul>
+          </div>
+  
+          <!-- Support -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Support</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Patreon</a></li>
+              <li><a href="https://www.stickermule.com/2e58deb5953f134" class="hover:underline">Stickers</a></li>
+            </ul>
+          </div>
+  
+          <!-- Community -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Community</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.facebook.com/profile.php?id=100092475161267" class="hover:underline">Facebook</a></li>
+              <li><a href="https://www.instagram.com/thefeywildvault/" class="hover:underline">Instagram</a></li>
+              <li><a href="mailto:thefeywildvault@gmail.com" class="hover:underline">Contact</a></li>
+            </ul>
+          </div>
+  
+        </div>
+      </div>
+  
+    <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
+        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<!-- MODAL -->
+  <div id="accountModal"
+     class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative">
+      <button id="closeAccountModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Account Settings</h2>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Profile Picture</label>
+    <input type="file" id="avatarUpload" accept="image/*" class="mb-2" />
+    <div class="relative w-40 h-40 rounded-full overflow-hidden border-2 border-purple-500 mx-auto">
+      <img id="avatarPreview" class="w-full h-full object-cover object-center" src="./img/default-avatar.jpg" />
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Username</label>
+    <input id="accountUsername"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+            readonly />
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Display Name</label>
+    <input id="accountDisplayName"
+            type="text"
+            class="w-full px-3 py-2 rounded bg-white dark:bg-gray-600 border border-gray-300 dark:border-gray-500 text-gray-900 dark:text-white" />
+  </div>
+
+  <button id="saveAccountChanges"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">
+    Save Changes
+  </button>
+
+  <p id="accountSaveConfirm" class="text-green-500 mt-3 hidden">Changes saved successfully!</p>
+  <br><br>
+  <h2 class="text-xl font-semibold mb-4">Patreon</h2>
+  <div class="mb-4">
+
+    <!--Patreon Status-->
+    <div id="patreonStatus"
+        class="text-sm text-gray-900 dark:text-white mb-2">
+    </div>
+
+    <!-- Link Button -->
+    <a id="patreonLinkBtn"
+      href="/api/patreon/link"
+      class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
+      <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
+      Link Patreon Account
+    </a>
+
+    <!-- Unlink Button -->
+    <button id="patreonUnlinkBtn" class="px-4 py-2 bg-red-700 rounded hidden">Unlink</button>
+  
+  </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div id="friendsModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+      <button id="closeFriendsModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+      <h2 class="text-xl font-semibold mb-4">Manage Friends</h2>
+
+      <div class="mb-4">
+        <label for="friendSearchInput" class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Search by Username</label>
+        <div class="flex space-x-2">
+          <input id="friendSearchInput" type="text" placeholder="Enter username"
+                 class="flex-grow px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100" />
+          <button id="friendSearchBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded">Add Friend</button>
+        </div>
+        <p id="friendSearchMessage" class="mt-2 text-sm text-red-500 hidden"></p>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-2">Your Friends</h3>
+      <ul id="friendsList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Friends list items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Courier Modal -->
+<div id="courierModal" class="fixed inset-0 bg-black/50 z-50 hidden">
+  <div class="flex items-center justify-center h-full w-full">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+
+      <!-- X Close Button like friendsModal -->
+      <button id="closeCourierModal"
+              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+        &times;
+      </button>
+
+      <h2 class="text-xl font-semibold mb-4">Courier Inbox</h2>
+
+      <ul id="courierInboxList" class="space-y-2 max-h-64 overflow-y-auto">
+        <!-- Courier inbox items will be populated here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDropdown(id) {
+    const dropdown = document.getElementById(id);
+    dropdown.classList.toggle('hidden');
+  }
+</script>
+
+<script src="./js-code/account.js" defer></script>
+<script src="./js-code/rchaos.js" defer></script>
+<script src="./js-code/courier.js" defer></script>
+<script src="./js-code/chaosbutton.js" defer></script>
+<script src="./js-code/item-save.js" defer></script>
+<script src="./js-code/item-share.js" defer></script>
+<script src="./js-code/dicegif.js" defer></script>
+<script src="favicon.js" defer></script>
+
+</body>
+</html>

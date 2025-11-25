@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Feywild Vault</title>
+  <link rel="stylesheet" href="./style/cursebutton.css">
+  <link rel="stylesheet" href="./style/dicegif.css">
+  <link rel="stylesheet" href="./style/rmig.css">
+  <link rel="stylesheet" href="./style/scrolls.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Optional: Toggle dark mode on load
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+
+  <!-- NAVBAR -->
+  <header class="bg-white dark:bg-gray-800 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+  
+      <!-- Logo + Title Group -->
+      <div class="flex items-center space-x-3">
+        <a href="index.html">
+          <img id="Logo" src="./img/favicon.ico" alt="the outline of a d20 dice" class="w-8 h-8" />
+        </a>
+        <a href="index.html" class="text-2xl font-bold tracking-tight">
+          The Feywild Vault
+        </a>
+      </div>
+  
+      <!-- Navigation -->
+      <nav class="space-x-4">
+        <a href="./" class="hover:underline">Home</a>
+        <a href="./items.html" class="hover:underline">Items</a>
+        <a href="./inventory.html" class="hover:underline">Inventory</a>
+        <a href="./resources.html" class="hover:underline">Resources</a>
+        <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Support</a>
+      </nav>
+    </div>
+
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-12 text-center">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
+            Moonquill's Library
+          </h2>
+      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">Browse our selection of magical scrolls for treasure hoards, loot drops, or arcane discoveries on the fly.</p>
+    </div>
+  </section>
+
+<!-- TEXT INFO SECTION -->
+<section class="container mx-auto px-4 pb-6 text-left">
+ <div class="md:col-span-3 px-4">
+    <h3 class="text-2xl font-semibold mb-2">About This Collection</h3>
+    <p class="text-gray-700 dark:text-gray-300">
+    <b>How Scrolls Work: </b>A spell scroll bears the words of a sing spell, written in a mystical cipher.
+    If the spell is on your class's spell list, you can read the scroll and cast its spell without providing any material components.
+    Otherwise, the scroll is unintelligible. Casting the spell by reading the requires the spell's normal casting time.
+    Once the spell is cast, the words on the scroll fade, and it crumbles to dust.
+    If casting is interrupted, the scroll is not lost.
+
+    If the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully.
+    The DC equals 10 + the spell's level. On a failed check, the spell disappears from the scroll with no other effect.
+    <br><br>
+    <b>Miscibility: </b>
+    Strange result might happen when mixing potions or being under the effects of multiple potions at the same time.
+    When mixing two potions together, you can roll on the Potion Miscibility table.
+    If more than two are combined, roll again for each subsequenbt potion, combining the results.
+    Unless the effects are immediately obvious, reveal them only when they become evident.
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT WITH LEFT COLUMN -->
+<section class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+<!-- Select All/Unselect All Controls -->
+  <aside class="space-y-4">
+    
+   <div class="max-w-md p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md space-y-4">
+
+<!-- Generate Button full width -->
+<div class="mb-4">
+<button id="generateScrollButton" onclick="generateRandomScrolls()"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+    Generate Scrolls
+  </button>
+</div>
+
+<div class="mb-4">
+<button id="toggleEffectButton" onclick="toggleScrollEffects()"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+    Toggle Effect
+  </button>
+</div>
+
+<!-- Generate Button full width -->
+<div class="mb-4">
+<button id="generateMishapButton"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+    Generate Mishap
+  </button>
+</div>
+
+<!-- Inputs side-by-side container -->
+<div class="flex space-x-4 mb-4">
+  <!-- Level Dropdown -->
+  <div class="flex-1">
+    <label for="level" class="block text-sm font-medium">Level:</label>
+   <select id="level" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+</select>
+  </div>
+
+  <!-- Number of Items Dropdown -->
+  <div class="flex-1">
+    <label for="runCount" class="block text-sm font-medium">Number of Items:</label>
+   <select id="runCount" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+  </div>
+</div>
+
+<!-- School Dropdown -->
+<div class="w-full" id="scrollSchoolDropdown">
+  <label class="block mb-1 text-sm font-medium">School:</label>
+  <button type="button" onclick="toggleDropdown(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select School</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <!-- Grid for buttons and checkboxes -->
+    <div class="grid grid-cols-2 gap-x-4 px-4 pb-2">
+      <!-- Buttons -->
+      <button onclick="selectAllInSCHDropdown('scrollSchoolDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInSCHDropdown('scrollSchoolDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+    
+      <!-- Left Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Abjuration"> Abjuration</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Conjuration"> Conjuration</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Divination"> Divination</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Enchantment"> Enchantment</label>
+      </div>
+
+      <!-- Right Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Evocation"> Evocation</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Illusion"> Illusion</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Necromancy"> Necromancy</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox school" value="Transmutation"> Transmutation</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Casting Time Dropdown -->
+<div class="w-full" id="scrollCastDropdown">
+  <label class="block mb-1 text-sm font-medium">Casting Time:</label>
+  <button type="button" onclick="toggleDropdownCasting(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select Casting Time</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <div class="grid grid-cols-2 gap-x-4 px-4 pb-2">
+      <button onclick="selectAllInCSTDropdown('scrollCastDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInCSTDropdown('scrollCastDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+    
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="1 Action"> 1 Action</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="1 Bonus Action"> 1 Bonus Action</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="1 Reaction"> 1 Reaction</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="1 Minute"> 1 Minute</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="10 Minutes"> 10 Minutes</label>
+      </div>
+
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="1 Hour"> 1 Hour</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="8 Hours"> 8 Hours</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="12 Hours"> 12 Hours</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox cast" value="24 Hours"> 24 Hours</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Type Dropdown -->
+<div class="w-full" id="scrollTypeDropdown">
+  <label class="block mb-1 text-sm font-medium">Type:</label>
+  <button type="button" onclick="toggleDropdownType(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select Type</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <!-- Grid for buttons and checkboxes -->
+    <div class="grid grid-cols-2 gap-x-4 px-4 pb-2">
+      <!-- Buttons -->
+      <button onclick="selectAllInTYPDropdown('scrollTypeDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInTYPDropdown('scrollTypeDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+    
+      <!-- Left Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Banishment"> Banishment</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Buff"> Buff</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Communication"> Communication</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Control"> Control</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Creation"> Creation</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Damage"> Damage</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Debuff"> Debuff</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Deception"> Deception</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Detection"> Detection</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Environment"> Environment</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Exploration"> Exploration</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Foreknowledge"> Foreknowledge</label>
+      </div>
+
+      <!-- Right Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Healing"> Healing</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Invisible"> Invisible</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Movement"> Movement</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Negation"> Negation</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Shapechanging"> Shapechanging</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Social"> Social</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Status Condition"> Status Condition</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Summoning"> Summoning</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Teleportation"> Teleportation</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Unconscious"> Unconscious</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Utility"> Utility</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox type" value="Warding"> Warding</label>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Status Dropdown -->
+<div class="w-full" id="scrollStatusDropdown">
+  <label class="block mb-1 text-sm font-medium">Status Condition:</label>
+  <button type="button" onclick="toggleDropdownStatus(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select Status Condition</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <!-- Grid for buttons and checkboxes -->
+    <div class="grid grid-cols-2 gap-x-4 px-4 pb-2">
+      <!-- Buttons -->
+      <button onclick="selectAllInSTSDropdown('scrollStatusDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInSTSDropdown('scrollStatusDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+    
+      <!-- Left Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Blinded"> Blinded</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Charmed"> Charmed</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Deafened"> Deafened</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Frightened"> Frightened</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Paralyzed"> Paralyzed</label>
+      </div>
+
+      <!-- Right Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Petrified"> Petrified</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Prone"> Prone</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Restrained"> Restrained</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox status" value="Stunned"> Stunned</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Element Dropdown -->
+<div class="w-full" id="scrollElementDropdown">
+  <label class="block mb-1 text-sm font-medium">Element:</label>
+  <button type="button" onclick="toggleDropdownElement(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select Element</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <!-- Grid for buttons and checkboxes -->
+    <div class="grid grid-cols-2 gap-x-4 px-4 pb-2">
+      <!-- Buttons -->
+      <button onclick="selectAllInEDropdown('scrollElementDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInEDropdown('scrollElementDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+
+      <!-- Left Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Acid"> Acid</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Cold"> Cold</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Fire"> Fire</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Force"> Force</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Lightning"> Lightning</label>
+      </div>
+
+      <!-- Right Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Necrotic"> Necrotic</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Poison"> Poison</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Psychic"> Psychic</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Radiant"> Radiant</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox element" value="Thunder"> Thunder</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Source Dropdown -->
+<div class="w-full" id="scrollSourceDropdown">
+  <label class="block mb-1 text-sm font-medium">Source:</label>
+  <button type="button" onclick="toggleDropdownSource(this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+    <span>Select Scource</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div class="dropdown-content hidden mt-2 text-sm">
+    <!-- Grid for buttons and checkboxes -->
+    <div class="grid gap-x-4 px-4 pb-2">
+      <!-- Buttons -->
+      <button onclick="selectAllInSCEDropdown('scrollSourceDropdown')" class="mb-2 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+        Select All
+      </button>
+      <button onclick="unselectAllInSCEDropdown('scrollSourceDropdown')" class="mb-2 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+        Unselect All
+      </button>
+    
+      <!-- Left Column Checkboxes -->
+      <div class="space-y-1">
+        <label class="block"><input type="checkbox" class="dropdown-checkbox source" value="Elemental Evil"> Elemental Evil</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox source" value="Players Handbook"> Players Handbook</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox source" value="Tasha's Cauldron of Everything"> Tasha's Cauldron of Everything</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox source" value="Xanathars Guide To Everything"> Xanathars Guide To Everything</label>
+        <label class="block"><input type="checkbox" class="dropdown-checkbox source" value="Homebrew"> Homebrew</label>
+
+      </div>      
+    </div>
+  </div>
+</div>
+
+<br>
+
+</aside>
+
+ <!-- Result Output -->
+<div class="md:col-span-3 px-4">
+  <div id="result" class="hide-effect parchment-bg text-black p-4 rounded shadow-md w-full" style="line-height: 2.5; text-indent: 2px; min-height: 800px;">
+     <p id="placeholder-text" class="text-gray-500 italic">- Click "Generate" to discover new arcane scrolls -</p>
+  </div>
+</div>
+
+  <!-- Loading GIF -->
+  <div id="gifDisplayContainer" class="hidden mt-4">
+    <img src="./gif/dice.GIF" alt="Loading" id="loadingGif">
+  </div>
+
+  <!-- Optional Text -->
+  <div class="mt-8 text-gray-600 dark:text-gray-300">
+   
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 items-start">
+  
+        <!-- Branding (2/5 columns) -->
+        <div class="flex items-start space-x-4 md:col-span-2">
+          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-1" />
+          <div>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Feywild Vault</h4>
+            <p class="text-sm">Tools and content for D&D adventurers who wander the enchanted paths of the Feywild.</p>
+          </div>
+        </div>
+  
+        <!-- Link Sections (3/5 columns, grid distributes space evenly) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:col-span-3 gap-8">
+  
+          <!-- Explore -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Explore</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="#" class="hover:underline">Home</a></li>
+              <li><a href="./items.html" class="hover:underline">Items</a></li>
+              <li><a href="./resources.html" class="hover:underline">Resources</a></li>
+            </ul>
+          </div>
+  
+          <!-- Support -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Support</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Patreon</a></li>
+              <li><a href="https://www.stickermule.com/2e58deb5953f134" class="hover:underline">Stickers</a></li>
+            </ul>
+          </div>
+  
+          <!-- Community -->
+          <div>
+            <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Community</h5>
+            <ul class="space-y-1 text-sm">
+              <li><a href="https://www.facebook.com/profile.php?id=100092475161267" class="hover:underline">Facebook</a></li>
+              <li><a href="https://www.instagram.com/thefeywildvault/" class="hover:underline">Instagram</a></li>
+              <li><a href="mailto:thefeywildvault@gmail.com" class="hover:underline">Contact</a></li>
+            </ul>
+          </div>
+  
+        </div>
+      </div>
+  
+    <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
+        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  function toggleDropdown(id) {
+    const dropdown = document.getElementById(id);
+    dropdown.classList.toggle('hidden');
+  }
+</script>
+
+<script src="./js-code/rscrolls.js" defer></script>
+<script src="./js-code/rmishap.js" defer></script>
+<script src="./js-code/scroll%20selection.js" defer></script>
+<script src="./js-code/dicegif.js" defer></script>
+<script src="favicon.js" defer></script>
+
+</body>
+</html>

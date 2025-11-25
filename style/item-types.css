@@ -1,0 +1,153 @@
+header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            font-size: 0.70rem;
+        }
+
+        .title-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 0px;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-align: center;
+            line-height: 1.2; /* Reduce line height for better spacing */
+        }
+
+        #Logo {
+            margin-left: 0px; /* Set distance between title and logo */
+            width: 75px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            padding-bottom: 25px;
+            padding-top: 0px;
+            margin: 0;
+            margin-top: -15px;
+            display: flex;
+            gap: 10px;
+            align-items: center; /* Ensure items are centered */
+            justify-content: center; /* Ensure items are centered */
+            text-align: center; /* Center text alignment for nav items */
+            width: 100%; /* Make sure the ul takes up the full width */
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav ul li a[href="#magic"] {
+            line-height: 0; /* Adjust line height to reduce space between lines */
+        }
+
+        @media (min-width: 700px) {
+            header {
+                font-size: 1.2rem;
+            }
+            
+            .title-logo {
+                gap: 15px;
+            }
+    
+            h1 {
+                font-size: 2.5rem;
+                line-height: normal; /* Reset line height for larger screens */
+            }
+    
+            #Logo {
+                width: 100px;
+            }
+    
+            nav ul {
+                flex-direction: row;
+                gap: 35px;
+                justify-content: center; /* Ensure items are centered on larger screens */
+                align-items: center; /* Center vertically as well */
+            }
+    
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+        }
+
+/* Styling for the "Other Generators" dropdown */
+nav ul .other-generators:hover .dropdown-content {
+    display: block;
+}
+
+nav ul .other-generators .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #3e2b20b4; /* Mystical dark background color */
+    border: 1px solid #715b47; /* Subtle border for a refined look */
+    border-radius: 5px; /* Soft edges */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Gentle shadow for depth */
+    z-index: 1;
+    min-width: 180px;
+}
+
+nav ul .other-generators .dropdown-content li a {
+    padding: 10px 15px;
+    color: #eae0d5;
+    text-decoration: none;
+    display: block;
+    font-family: 'Cinzel', serif;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+nav ul .other-generators .dropdown-content li a:hover {
+    background-color: #715b47; /* Highlight color on hover */
+    color: #fff; /* Contrast for readability */
+}
+
+/* Row of generator icons */
+
+.image-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 200;
+}
+
+.image-row a {
+    display: block;
+    margin: 0 15px; /* Adjusts the spacing between images */
+}
+
+.image-row img {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%; /* Makes the image circular */
+    border: 3px solid #3e2b20b4; /* Adds a black border */
+    padding: 5px; /* Creates space between the image and the border */
+    transition: transform 0.3s ease;
+}
+
+.image-row img:hover {
+    transform: scale(1.1);
+}
+
+/* Hide images on smaller screens */
+@media (max-width: 700px) {
+    .image-row {
+        display: none;
+    }
+}
