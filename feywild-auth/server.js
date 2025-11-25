@@ -21,7 +21,12 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ✅ CORS setup
 app.use(cors({
-  origin: 'http://localhost:3000', // match frontend URL
+  origin: [
+    'http://localhost:3000',
+    'https://thefeywildvault.com',
+    'https://www.thefeywildvault.com',
+    'https://feywildvault-backend.onrender.com'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
@@ -40,9 +45,9 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
-    secure: false, // true if you're using HTTPS in production
+    secure: true, // true if you're using HTTPS in production
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24
   }
 }));

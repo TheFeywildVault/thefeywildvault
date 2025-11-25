@@ -10,7 +10,7 @@
     const displayName = document.getElementById('displayName').value;
 
     try {
-      const res = await fetch('http://localhost:3000/api/register', {
+      const res = await fetch('https://feywildvault-backend.onrender.com/api/register', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

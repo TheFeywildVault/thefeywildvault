@@ -879,7 +879,7 @@ let returnedEffects = [];
 // New: Load saved effects from backend on page load
 async function loadReturnedEffects() {
   try {
-    const res = await fetch('/api/returned-effects');
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/returned-effects');
     if (res.ok) {
       const data = await res.json();
       returnedEffects = data.returnedEffects || [];
@@ -1003,7 +1003,7 @@ function updateEffectTally() {
 // Backend save helper
 async function saveReturnedEffects() {
   try {
-    const res = await fetch('/api/returned-effects', {
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/returned-effects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

@@ -142,7 +142,7 @@ if (pendingDraws.length > 1) {
 
   async function saveDeckHistory() {
   try {
-    await fetch('/api/deck-history', {
+    await fetch('https://feywildvault-backend.onrender.com/api/deck-history', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -243,7 +243,7 @@ async function clearTally() {
 
   try {
     // Tell backend to clear history for this user
-    const res = await fetch('/api/deck-history/clear', {
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/deck-history/clear', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
@@ -280,7 +280,7 @@ function resetDeck() {
 
 async function loadDeckHistory() {
   try {
-    const res = await fetch('/api/deck-history', { credentials: 'include' });
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/deck-history', { credentials: 'include' });
     if (!res.ok) return;
     const data = await res.json();
    if (data.deckHistory) {

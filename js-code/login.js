@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("loginPassword").value;
 
   try {
-    const res = await fetch("/api/login", {
+    const res = await fetch("https://feywildvault-backend.onrender.com/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

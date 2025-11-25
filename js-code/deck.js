@@ -217,7 +217,7 @@ async function saveDeckHistory() {
 });
 
 
-    const res = await fetch('/api/deck-history', {
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/deck-history', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -232,7 +232,7 @@ async function saveDeckHistory() {
 
 async function loadDeckHistory() {
   try {
-    const res = await fetch('/api/deck-history', { credentials: 'include' });
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/deck-history', { credentials: 'include' });
     if (!res.ok) return;
     const data = await res.json();
 
@@ -267,7 +267,7 @@ async function clearTally() {
   updateTally();
 
   try {
-    await fetch('/api/deck-history/clear', {
+    await fetch('https://feywildvault-backend.onrender.com/api/deck-history/clear', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'

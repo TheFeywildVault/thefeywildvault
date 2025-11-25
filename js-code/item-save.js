@@ -104,7 +104,7 @@ if (!subcategory) {
 console.log("Saving item:", { category, subcategory, typeLineText });
 
 // Save to backend
-  const res = await fetch("/api/inventory/add", {
+  const res = await fetch("https://feywildvault-backend.onrender.com/api/inventory/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -126,7 +126,7 @@ console.log("Saving item:", { category, subcategory, typeLineText });
   const itemId = courierLi?.dataset.itemId;
   if (itemId) {
     try {
-      const delRes = await fetch("/api/courier/delete", {
+      const delRes = await fetch("https://feywildvault-backend.onrender.com/api/courier/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let storedItems = [];
   try {
-    const res = await fetch("/api/inventory", { credentials: "include" });
+    const res = await fetch("https://feywildvault-backend.onrender.com/api/inventory", { credentials: "include" });
     if (res.ok) {
       const data = await res.json();
       storedItems = data.items || [];
@@ -270,7 +270,7 @@ storedItems.forEach((itemObj, index) => {
 
               if (count === 0) {
                 itemDiv.remove();
-                await fetch("/api/inventory/delete", {
+                await fetch("https://feywildvault-backend.onrender.com/api/inventory/delete", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   credentials: "include",
@@ -318,7 +318,7 @@ document.getElementById("confirmYes").onclick = async () => {
   if (itemToRemove && itemToRemoveId) {
     itemToRemove.remove();
 
-    await fetch("/api/inventory/delete", {
+    await fetch("https://feywildvault-backend.onrender.com/api/inventory/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

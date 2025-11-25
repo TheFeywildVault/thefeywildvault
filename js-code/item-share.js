@@ -21,7 +21,7 @@ async function openShareModal(button = null) {
   }
 
   try {
-    const res = await fetch('/api/friends', { credentials: 'include' });
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/friends', { credentials: 'include' });
     if (!res.ok) throw new Error('Failed to fetch friends');
     const { friends } = await res.json();
 
@@ -76,7 +76,7 @@ console.log("Sending to:", username);
 console.log("Item HTML:", itemToShare?.html);
 
   try {
-    const res = await fetch('/api/courier/send', {
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/courier/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -281,7 +281,7 @@ router.post('/send', requireLogin, async (req, res) => {
 // Load courier inbox from backend
 async function loadCourierInbox() {
   try {
-    const res = await fetch('/api/courier/inbox', { credentials: 'include' });
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/courier/inbox', { credentials: 'include' });
     if (!res.ok) throw new Error('Failed to load courier inbox');
     const data = await res.json();
     renderCourierInbox(data.inbox);
@@ -297,7 +297,7 @@ const itemId = li?.dataset.itemId;
   if (!itemId) return alert('Item ID missing');
 
   try {
-    const res = await fetch('/api/courier/delete', {
+    const res = await fetch('https://feywildvault-backend.onrender.com/api/courier/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
