@@ -2436,16 +2436,42 @@ const categoryWeights = {
   "Misc": 3,  
 };
 
+function patreonReady() {
+  return window.CurrentUser && window.PatreonStatus;
+}
+
+// Ensure CurrentUser is synced across pages
+(async function initUser() {
+  try {
+    const res = await fetch("https://feywildvault-backend.onrender.com/api/user", {
+      credentials: "include"
+    });
+
+    if (res.ok) {
+      const { user } = await res.json();
+      window.CurrentUser = { username: user.username };
+    }
+  } catch (e) {
+    console.warn("Could not load current user.");
+  }
+})();
+
+// Load Patreon status on this page too
+(async function initPatreon() {
+  if (window.refreshPatreonStatus) {
+    await window.refreshPatreonStatus();
+  }
+})();
+
 // --------------------------------------
 // Manual Overrides by Username (site account username)
 // Each user can be allowed to "save", "share", or both.
 // --------------------------------------
-const PatreonOverrideRules = {
   // Username: permissions
   // true = allowed, false = not allowed
 
-  "pabuthewizard":   { save: true,  share: true },
-   
+ window.PatreonOverrideRules = {
+  "VaultGuardian": { save: true, share: true }
 };
 
 // -------------------------
@@ -2458,38 +2484,26 @@ function showPatreonPopup() {
 
 // Returns true/false depending on tier access
 function hasPatreonAccess(action) {
-  const pat = window.PatreonStatus || null;
-  const tier = pat?.tierName || null;
 
-  // -----------------------------------
-  // WEBSITE USERNAME OVERRIDE CHECK
-  // -----------------------------------
-  const currentUser = window.CurrentUser?.username || null;
-
-  if (currentUser && PatreonOverrideRules[currentUser]) {
-    const override = PatreonOverrideRules[currentUser];
-
-    // If override explicitly grants this action → allow it
-    if (override[action] === true) return true;
-
-    // If override explicitly denies → deny immediately
-    if (override[action] === false) return false;
+  if (!patreonReady()) {
+    console.warn("Patreon system not ready — deferring check");
+    return false; 
   }
 
-  // -----------------------------------
-  // PATREON MEMBERSHIP RULES
-  // -----------------------------------
+  const currentUser = window.CurrentUser.username;
+  const tier = window.PatreonStatus.tierName;
 
+  // --- OVERRIDE CHECK ---
+  if (window.PatreonOverrideRules[currentUser]?.[action]) {
+    return true;
+  }
+
+  // --- PATREON TIER CHECK ---
   const saveAllowed = ["The Traveler", "The Explorer", "The Adventurer"];
   const shareAllowed = ["The Explorer", "The Adventurer"];
 
-  if (action === "save") {
-    return saveAllowed.includes(tier);
-  }
-
-  if (action === "share") {
-    return shareAllowed.includes(tier);
-  }
+  if (action === "save") return saveAllowed.includes(tier);
+  if (action === "share") return shareAllowed.includes(tier);
 
   return false;
 }
@@ -2901,4 +2915,6 @@ function showPopup(buttonElement) {
 
 }
 
-window.PatreonOverrideRules = PatreonOverrideRules;
+if (window.refreshPatreonStatus) {
+  window.refreshPatreonStatus();
+}

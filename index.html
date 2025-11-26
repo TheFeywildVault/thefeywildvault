@@ -270,7 +270,7 @@
 
     <!-- Link Button -->
     <a id="patreonLinkBtn"
-      href="/api/patreon/link"
+      href="https://feywildvault-backend.onrender.com/api/patreon/link"
       class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
       <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
       Link Patreon Account
@@ -334,7 +334,32 @@
   </div>
 </div>
 
+<script>
+  function toggleDropdown(id) {
+    const dropdown = document.getElementById(id);
+    dropdown.classList.toggle('hidden');
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const unlinkBtn = document.getElementById("patreonUnlinkBtn");
+  if (!unlinkBtn) return;
+
+  unlinkBtn.addEventListener("click", async () => {
+    const res = await fetch("/api/patreon/unlink", { method: "POST" });
+    const json = await res.json();
+
+    if (json.success) {
+      window.location.reload();
+    } else {
+      alert("Failed to unlink Patreon");
+    }
+  });
+});
+
+</script>
+
 <script src="./js-code/account.js" defer></script>
+<script src="./js-code/rmig.js" defer></script>
 <script src="./js-code/courier.js" defer></script>
 <script src="./js-code/item-save.js" defer></script>
 <script src="./js-code/item-share.js" defer></script>
