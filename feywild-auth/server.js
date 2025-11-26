@@ -82,6 +82,22 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  const allowedOrigins = [
+    'https://thefeywildvault.com',
+    'https://www.thefeywildvault.com',
+    'http://localhost:3000'
+  ];
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Credentials", "true");
+  }
+
+  next();
+});
 
 // =========================
 // API Routes
