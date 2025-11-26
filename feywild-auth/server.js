@@ -57,6 +57,7 @@ app.options('*', cors());
 // =========================
 app.use(express.json());
 
+app.set("trust proxy", 1);
 
 // =========================
 // Session Configuration
