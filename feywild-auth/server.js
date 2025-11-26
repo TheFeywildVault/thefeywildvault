@@ -9,7 +9,7 @@ const path = require('path');
 
 const app = express();
 
-// ✅ Connect to MongoDB with debugging
+// ✅ Connect to MongoDB
 console.log("MONGO_URI:", process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI)
@@ -19,47 +19,72 @@ mongoose.connect(process.env.MONGO_URI)
     console.error(err);
   });
 
-// ✅ CORS setup
+
+//
+// =========================
+//        CORS (FIXED)
+// =========================
+//
+const allowedOrigins = [
+  'https://thefeywildvault.com',
+  'https://www.thefeywildvault.com',
+  'http://localhost:3000'
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://thefeywildvault.com',
-    'https://www.thefeywildvault.com',
-    'https://feywildvault-backend.onrender.com'
-  ],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow apps/curl
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      console.log("❌ Blocked by CORS:", origin);
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
 
-// ✅ Handle preflight requests
+// Preflight MUST run before JSON/session
 app.options('*', cors());
 
-// ✅ Parse JSON
+
+// =========================
+// Parse JSON
+// =========================
 app.use(express.json());
 
-// ✅ Session config
+
+// =========================
+// Session Configuration
+// =========================
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
-    secure: true, // true if you're using HTTPS in production
+    secure: true,
     httpOnly: true,
     sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24
   }
 }));
 
-// ✅ Debug middleware — log requests + session
+
+// Debug logs
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.url}`);
   console.log('Session:', req.session);
   next();
 });
 
-// ✅ API Routes
+
+// =========================
+// API Routes
+// =========================
 app.use('/api/patreon', require('./routes/patreon'));
 app.use('/api', require('./routes/auth'));
 app.use('/api/friends', require('./routes/friends'));
@@ -67,7 +92,8 @@ app.use('/api/courier', require('./routes/courier'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/chaos', require('./routes/chaos'));
 
-// ✅ Serve static files
+
+// Static files
 app.use(express.static(path.join(__dirname, '../')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -75,6 +101,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// ✅ Start server
+
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
