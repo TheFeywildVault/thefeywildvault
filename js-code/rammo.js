@@ -341,12 +341,12 @@ outputBox.classList.add("output-box", "result", "ammo-result", "item-result", "r
 
 outputBox.innerHTML = `
   <button class="aadd-button absolute top-1 right-12 w-16 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
-    onclick="openShareModal(this)">
+    onclick="handleShareButton(this)">
     Share
   </button>
 
   <button class="aadd-button absolute top-1 right-2 w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
-    onclick="saveItemToInventory(this)">
+    onclick="handleSaveButton(this)">
     +
   </button>
   <div class="rarity ${rarity.replace(" ", ".")} font-semibold text-lg mb-1">${finalname}</div>

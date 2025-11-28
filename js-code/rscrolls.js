@@ -731,12 +731,12 @@ function generateRandomScrolls() {
 
     scrollHTML.innerHTML = `
      <button class="aadd-button absolute top-2 right-12 w-16 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
-    onclick="openShareModal(this)">
+    onclick="handleShareButton(this)">
     Share
     </button>  
     
     <button class="aadd-button absolute top-2 right-2 w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
-        onclick="saveItemToInventory(this)">
+        onclick="handleSaveButton(this)">
         +
       </button>
       <div class="popup-message hidden absolute top-12 right-4 bg-gray-500/90 text-white text-sm px-3 py-1 rounded shadow z-20">

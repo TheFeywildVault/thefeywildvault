@@ -321,38 +321,38 @@ const VGoodChaosTable = [
 //DAMAGE TYPE       
 
 // Define the table as an array of objects
-const damageTypes = [
-    { id: 1, damageType: "Acid" },
-    { id: 2, damageType: "Cold" },
-    { id: 3, damageType: "Fire" },
-    { id: 4, damageType: "Force" },
-    { id: 5, damageType: "Lightning" },
-    { id: 6, damageType: "Necrotic" },
-    { id: 7, damageType: "Poison" },
-    { id: 8, damageType: "Psychic" },
-    { id: 9, damageType: "Radiant" },
-    { id: 10, damageType: "Thunder" }
+const damageCTypes = [
+    { id: 1, damageCType: "Acid" },
+    { id: 2, damageCType: "Cold" },
+    { id: 3, damageCType: "Fire" },
+    { id: 4, damageCType: "Force" },
+    { id: 5, damageCType: "Lightning" },
+    { id: 6, damageCType: "Necrotic" },
+    { id: 7, damageCType: "Poison" },
+    { id: 8, damageCType: "Psychic" },
+    { id: 9, damageCType: "Radiant" },
+    { id: 10, damageCType: "Thunder" }
 ];
 
 // Array to store the last two selected damage types
 let lastTwoSelections = [];
 
 // Function to select a random damage type, avoiding the last two selections
-function getRandomDamageType() {
-    let availableDamageTypes = damageTypes.filter(type => 
-        !lastTwoSelections.includes(type.damageType)
+function getRandomDamageCType() {
+    let availableDamageCTypes = damageCTypes.filter(type => 
+        !lastTwoSelections.includes(type.damageCType)
     );
 
     // In case all damage types are excluded by the last two selections
-    if (availableDamageTypes.length === 0) {
-        availableDamageTypes = damageTypes;
+    if (availableDamageCTypes.length === 0) {
+        availableDamageCTypes = damageCTypes;
     }
 
-    const randomIndex = Math.floor(Math.random() * availableDamageTypes.length);
-    const selectedType = availableDamageTypes[randomIndex];
+    const randomIndex = Math.floor(Math.random() * availableDamageCTypes.length);
+    const selectedType = availableDamageCTypes[randomIndex];
 
     // Update the last two selections
-    lastTwoSelections.push(selectedType.damageType);
+    lastTwoSelections.push(selectedType.damageCType);
     if (lastTwoSelections.length > 2) {
         lastTwoSelections.shift(); // Keep only the last two selections
     }
@@ -879,18 +879,31 @@ let returnedEffects = [];
 // New: Load saved effects from backend on page load
 async function loadReturnedEffects() {
   try {
-    const res = await fetch('https://feywildvault-backend.onrender.com/api/returned-effects');
-    if (res.ok) {
-      const data = await res.json();
-      returnedEffects = data.returnedEffects || [];
-      updateEffectTally();
-    } else {
-      console.error("Failed to load returned effects:", res.statusText);
+    const res = await fetch(
+      "https://feywildvault-backend.onrender.com/api/returned-effects",
+      { credentials: "include" }        // ⬅ send session cookie
+    );
+
+    if (res.status === 401) {
+      console.log("Not logged in; skipping loading returned effects.");
+      return; // Guest mode: nothing to load from account
     }
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Failed to load returned effects:", res.status, text);
+      return;
+    }
+
+    const data = await res.json();
+    console.log("Loaded returned effects:", data);
+    returnedEffects = data.returnedEffects || [];
+    updateEffectTally();
   } catch (err) {
     console.error("Error fetching returned effects:", err);
   }
 }
+
 loadReturnedEffects(); // Call on page load
 
 // -------------------------
@@ -1001,15 +1014,32 @@ function updateEffectTally() {
 
 // -------------------------
 // Backend save helper
+// -------------------------
+// Backend save helper
 async function saveReturnedEffects() {
   try {
-    const res = await fetch('https://feywildvault-backend.onrender.com/api/returned-effects', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ returnedEffects })
-    });
-    if (!res.ok) console.error("Failed to save returned effects:", res.statusText);
+    const res = await fetch(
+      "https://feywildvault-backend.onrender.com/api/returned-effects",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",          // ⬅ send session cookie
+        body: JSON.stringify({ returnedEffects }),
+      }
+    );
+
+    if (res.status === 401) {
+      console.log("Not logged in; cannot save returned effects to account.");
+      return; // Guest mode: local only
+    }
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Failed to save returned effects:", res.status, text);
+    } else {
+      const data = await res.json().catch(() => null);
+      console.log("Saved returned effects:", data);
+    }
   } catch (err) {
     console.error("Error saving returned effects:", err);
   }
@@ -1150,7 +1180,7 @@ function generateSingleEffect() {
   const effectResult = selectedTable[Math.floor(Math.random() * selectedTable.length)];
 
   // Generate all random components
-  const damageType = getRandomDamageType();
+  const damageCType = getRandomDamageCType();
   const creature = getRandomCreatureType();
   const language = getRandomLanguageType();
   const ability = getRandomAbilityType();
@@ -1179,7 +1209,7 @@ function generateSingleEffect() {
   }
 
   const finalEffect = effectResult.chaoseffect
-    .replace(/{element}/g, damageType.damageType)
+    .replace(/{element}/g, damageCType.damageCType)
     .replace(/{creature}/g, creature.creatureType)
     .replace(/{ability}/g, ability.AbilityType)
     .replace(/{lycan}/g, lycans.LycanType)
@@ -1318,5 +1348,10 @@ async function chooseControlledChaos(index) {
   resultBox.innerHTML = `<p>"<strong>${chosenEffect.name}</strong>" has been added to effects.</p>`;
 }
 
-// -------------------------
-// Rest of your code (tables, helpers, getRandom... functions) remain unchanged
+// --------------------------------------
+// Expose functions for inline onclick handlers
+// --------------------------------------
+window.generatechaos = generatechaos;
+window.generatecontrolledchaos = generatecontrolledchaos;
+window.clearTally = clearTally;
+window.chooseControlledChaos = chooseControlledChaos;

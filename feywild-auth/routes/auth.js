@@ -170,13 +170,18 @@ router.post('/account/update', upload.single('avatar'), async (req, res) => {
   }
 });
 
-//Chaos returned effects
+// Chaos returned effects
 router.get('/returned-effects', async (req, res) => {
-  if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
-  
+  // ✅ Accept either userId or user.id (covers all your other routes)
+  const userId = req.session.userId || req.session.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ error: 'Not logged in' });
+  }
+
   try {
-    const user = await User.findById(req.session.userId).select('chaosEffects');
-    res.json({ returnedEffects: user.chaosEffects || [] });
+    const user = await User.findById(userId).select('chaosEffects');
+    res.json({ returnedEffects: user?.chaosEffects || [] });
   } catch (err) {
     console.error('Error loading returned effects:', err);
     res.status(500).json({ error: 'Server error' });
@@ -184,12 +189,23 @@ router.get('/returned-effects', async (req, res) => {
 });
 
 router.post('/returned-effects', async (req, res) => {
-  if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
+  const userId = req.session.userId || req.session.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ error: 'Not logged in' });
+  }
+
   const { returnedEffects } = req.body;
-  if (!Array.isArray(returnedEffects)) return res.status(400).json({ error: 'Invalid data' });
+  if (!Array.isArray(returnedEffects)) {
+    return res.status(400).json({ error: 'Invalid data' });
+  }
 
   try {
-    const user = await User.findById(req.session.userId);
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
     user.chaosEffects = returnedEffects;
     await user.save();
     res.json({ success: true });

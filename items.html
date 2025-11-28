@@ -20,47 +20,100 @@
 
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
 
-  <!-- NAVBAR -->
-  <header class="bg-white dark:bg-gray-800 shadow-md">
-      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        
-       <div class="flex items-center space-x-3">
-          <a href="index.html">
-            <img id="Logo" src="./img/favicon.ico" alt="the outline of a d20 dice" class="w-8 h-8" />
-          </a>
-          <a href="index.html" class="text-2xl font-bold tracking-tight">
-            The Feywild Vault
-          </a>
-        </div>
+<!-- NAVBAR -->
+<header class="bg-white dark:bg-gray-800 shadow-md">
+  <div class="container mx-auto px-4 py-4
+              flex flex-col gap-3
+              md:flex-row md:items-center md:justify-between">
 
-        <div class="flex items-center space-x-4">
-        <nav class="space-x-4">
-            <a href="./index.html" class="hover:underline">Home</a>
-            <a href="./items.html" class="hover:underline">Items</a>
-            <a href="./inventory.html" class="hover:underline">Inventory</a>
-            <a href="./resources.html" class="hover:underline">Resources</a>
-            <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator" class="hover:underline">Support</a>
-        </nav>
+    <!-- Logo + Title (always first row on mobile) -->
+    <div class="flex items-center space-x-3 order-1 md:order-none">
+      <a href="./">
+        <img id="Logo" src="./img/favicon.ico"
+             alt="the outline of a d20 dice"
+             class="w-8 h-8 flex-shrink-0" />
+      </a>
+      <a href="./" class="text-2xl font-bold tracking-tight whitespace-nowrap">
+        The Feywild Vault
+      </a>
+    </div>
 
-          <div class="relative ml-4 z-50">
-            <button id="accountBtn" type="button" class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-500">
-              <img id="profilePic" src="./img/default-avatar.jpg" alt="User profile picture" class="w-full h-full object-cover" />
-            </button>
-            <div id="accountMenu" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded shadow-lg hidden">
-              <div class="p-4 text-sm text-gray-700 dark:text-gray-200"><span id="displayName">Guest</span></div>
-              <hr class="border-gray-300 dark:border-gray-600" />
-              <a id="loginLink" href="./login.html?redirect=" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Login</a>
-              <a id="signupLink" href="./register.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Sign Up</a>
-              <a id="accountSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Account</a>
-              <a id="friendsSettingsLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Friends</a>
-              <a id="courierLink" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Courier</a>
-              <button id="logoutButton" class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Logout</button>
-            </div>
-          </div>
-        </div>
+    <!-- Nav + Account on one row (mobile) -->
+    <div class="flex flex-row flex-wrap justify-center items-center gap-4 order-2
+                md:justify-end md:gap-4">
 
-      </div>
+      <!-- NAV LINKS -->
+      <nav class="flex flex-wrap justify-center 
+            gap-x-2 gap-y-1 text-sm
+            md:gap-x-4 md:text-base md:gap-y-0">
+      <a href="./" class="hover:underline">Home</a>
+      <a href="./items" class="hover:underline">Items</a>
+      <a href="./inventory" class="hover:underline">Inventory</a>
+      <a href="./resources" class="hover:underline">Resources</a>
+      <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator"
+        class="hover:underline">Support</a>
+      </nav>
+
+   <!-- ACCOUNT ICON (stays on the same row) -->
+<div class="relative z-50">
+  <button id="accountBtn" type="button"
+    class="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600
+           flex items-center justify-center overflow-hidden
+           focus:outline-none focus:ring-2 focus:ring-purple-500">
+    <img id="profilePic" src="./img/default-avatar.jpg"
+         alt="User profile picture"
+         class="w-full h-full object-cover" />
+  </button>
+
+  <!-- Dropdown -->
+  <div id="accountMenu"
+       class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800
+              border dark:border-gray-600 rounded shadow-lg hidden">
+
+    <div class="p-4 text-sm text-gray-700 dark:text-gray-200">
+      <span id="displayName">Guest</span>
+    </div>
+    <hr class="border-gray-300 dark:border-gray-600" />
+
+    <a id="loginLink"
+       href="./login.html?redirect="
+       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+       Login
+    </a>
+
+    <a id="signupLink"
+       href="./register.html"
+       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+       Sign Up
+    </a>
+
+    <a id="accountSettingsLink"
+       href="#"
+       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">
+       Account
+    </a>
+
+    <a id="friendsSettingsLink"
+       href="#"
+       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">
+       Friends
+    </a>
+
+    <a id="courierLink"
+       href="#"
+       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+       Courier
+    </a>
+
+    <button id="logoutButton"
+       class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">
+       Logout
+    </button>
+
   </div>
+</div>
+</div>
+</div>
 </header>
 
   <!-- HERO SECTION -->
@@ -353,8 +406,8 @@
   </div>
 </section>
  
-<!-- FOOTER -->
-<footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
+  <!-- FOOTER -->
+    <footer class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-400 pt-12 pb-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 items-start">
   
@@ -368,15 +421,15 @@
         </div>
   
         <!-- Link Sections (3/5 columns, grid distributes space evenly) -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 md:col-span-3 gap-8">
+        <div class="grid grid-cols-3 md:col-span-3 gap-8 justify-items-center">
   
           <!-- Explore -->
           <div>
             <h5 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">Explore</h5>
             <ul class="space-y-1 text-sm">
               <li><a href="#" class="hover:underline">Home</a></li>
-              <li><a href="./items.html" class="hover:underline">Items</a></li>
-              <li><a href="./resources.html" class="hover:underline">Resources</a></li>
+              <li><a href="./items" class="hover:underline">Items</a></li>
+              <li><a href="./resources" class="hover:underline">Resources</a></li>
             </ul>
           </div>
   
@@ -402,7 +455,7 @@
         </div>
       </div>
   
-    <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
+      <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
         <p>© 2025 The Feywild Vault. All rights reserved.</p>
       </div>
     </div>
@@ -562,15 +615,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
-<script src="./js-code/rmig.js?v=3" defer></script>
-<script src="./js-code/account.js?v=3" defer></script>
-<script src="./js-code/item-save.js" defer></script>
-<script src="./js-code/item-share.js" defer></script>
-<script src="./js-code/courier.js" defer></script>
-<script src="./js-code/item-toggle-buttons.js" defer></script>
-<script src="./js-code/item-filter-tooltip.js" defer></script>
-<script src="./js-code/item-type-selection.js" defer></script>
-<script src="favicon.js" defer></script>
+<script src="/js-code/patreon-access.js" defer></script>
+<script src="/js-code/rmig.js?v=3" defer></script>
+<script src="/js-code/account.js?v=3" defer></script>
+<script src="/js-code/item-save.js" defer></script>
+<script src="/js-code/item-share.js" defer></script>
+<script src="/js-code/item-toggle-button.js" defer></script>
+<script src="/js-code/item-filter-tooltip.js" defer></script>
+<script src="/js-code/item-type-selection.js" defer></script>
+<script src="/js-code/favicon.js" defer></script>
 
 </body>
 </html>

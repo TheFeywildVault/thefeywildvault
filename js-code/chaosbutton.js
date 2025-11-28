@@ -68,3 +68,6 @@ function populateDropdown(type) {
     });
   }
 }
+
+// Make toggleChaos available to inline onclick
+window.toggleChaos = toggleChaos;

@@ -17,8 +17,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   const courierLink = document.getElementById("courierLink");
 
 if (loginLink) {
-  const currentUrl = window.location.pathname + window.location.search;
-  loginLink.href = `./login.html?redirect=${encodeURIComponent(currentUrl)}`;
+  // Get clean path without leaking cPanel's internal file path
+  let cleanPath = location.pathname + location.search;
+
+  // Remove internal path if Apache leaked it (cPanel servers do this)
+  cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html\/TheFeywildVault/, "");
+
+  // Ensure redirect always stays inside /TheFeywildVault/
+  loginLink.href = `./login?redirect=${encodeURIComponent(cleanPath)}`;
+}
+
+if (signupLink) {
+  let cleanPath = location.pathname + location.search;
+  cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html\/TheFeywildVault/, "");
+  signupLink.href = `./register?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
   // Toggle dropdown menu
