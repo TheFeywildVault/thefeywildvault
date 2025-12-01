@@ -116,8 +116,29 @@ router.post('/logout', (req, res) => {
 // GET CURRENT USER
 router.get('/user', async (req, res) => {
   if (!req.session.userId) return res.status(401).end();
-  const user = await User.findById(req.session.userId).select('username displayName profilePic');
-  res.json({ user });
+
+  const user = await User.findById(req.session.userId)
+    .select('username displayName profilePic');
+
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Normalize profilePic so the frontend always gets a usable URL
+  let profilePic = null;
+  if (user.profilePic) {
+    profilePic = user.profilePic.startsWith('http')
+      ? user.profilePic
+      : `https://feywildvault-backend.onrender.com${user.profilePic}`;
+  }
+
+  res.json({
+    user: {
+      username: user.username,
+      displayName: user.displayName,
+      profilePic
+    }
+  });
 });
 
 const multer = require('multer');
