@@ -10,9 +10,11 @@ const RandomAmmoTable = [
 
 // ammo effect table
 const ammoeffectTable = [
-    {id: 1, effectname: "{flavor} {simplename}", common: "This projectile deals an additional 1d4 {element} damage.", uncommon: "This projectile deals an additional 1d6+1 {element} damage.", rare: "This projectile deals an additional 3d6+2 {element} damage.", veryrare: "This projectile deals an additional 5d6+3 {element} damage.", legendary: "This projectile deals an additional 8d6+4 {element} damage.", cost: "1", patreon: ""},
-    {id: 2, effectname: "Exploding {simplename}", common: "The cantrip, Fire Bolt, is stored within this projectile. When it hits a creature, the spell is cast targeting the creature.", uncommon: "The second level spell, Scorching Ray, is stored within this projectile. When it hits a creature, the spell is cast targeting the creature.", rare: "The third level spell, Fireball, is stored within this projectile. When it hits a creature, the spell is cast targeting the creature.", veryrare: "The fifth level spell, Immolation, is stored within this projectile. When it hits a creature, the spell is cast targeting the creature.", legendary: "The seventh level spell, Fire Storm, is stored within this projectile. When it hits a creature, the spell is cast targeting the creature.", cost: "1", patreon: ""},
-    ];
+    {id: 1, effectname: "{flavor} {item}", common: "This {item} deals an additional 1d6 {element} damage.", uncommon: "This {item} deals an additional 1d8 {element} damage.", rare: "This {item} deals an additional 2d8 {element} damage.", veryrare: "This {item} deals an additional 3d12 {element} damage.", legendary: "This {item} deals an additional 5d12 {element} damage.", cost: "", patreon: "", inspiration: "", flavor: ""},
+    {id: 2, effectname: "Walloping {item}", common: "This {item} packs a wallop. A creature hit by this {item} must succeed on a DC 10 Strength saving throw or be knocked prone.", uncommon: "", rare: "", veryrare: "", legendary: "", cost: "", patreon: "", inspiration: "", flavor: ""},
+    {id: 3, effectname: "Shrouded {item}", common: "", uncommon: "", rare: "When a creature is hit by this {item}, it must make a DC 15 Constitution saving throw or have their Strength score reduced by 2d4 for 1 hour, or by half as much on a success. This effect can't reduce a creature's Strength score below 6.", veryrare: "", legendary: "", cost: "", patreon: "", inspiration: "", flavor: ""},
+
+  ];
 
 //DAMAGE TYPE       
 
@@ -319,16 +321,31 @@ if (filteredItems.length === 0) {
       continue;
     }
 
-    const effectResult = getRandomEffect(effectTable, rarity);
+  // 🔁 Keep picking an effect for this rarity until it's non-empty
+let effectResult = null;
+const maxTries = 20; // safety cap to avoid infinite loop
 
-    // Remove language replacement (undefined)
-    effectResult.effect = effectResult.effect
-      .replace(/{element}/g, damageType)
-      .replace(/{creature}/g, creature.creatureType)
-      .replace("{bonus}", bonus)
-      .replace(/{flavor}/g, lflavor)
-      .replace(/{sitem}/g, sname)
-      .replace(/{item}/g, ttname);
+for (let attempt = 0; attempt < maxTries; attempt++) {
+  const candidate = getRandomEffect(effectTable, rarity);
+  if (candidate && candidate.effect && candidate.effect.trim() !== "") {
+    effectResult = candidate;
+    break;
+  }
+}
+
+// If still no valid effect found, skip this item
+if (!effectResult) {
+  continue; // move to next iteration of the for (let i = 0; i < runCount; i++) loop
+}
+
+// Now do the language replacement
+effectResult.effect = effectResult.effect
+  .replace(/{element}/g, damageType)
+  .replace(/{creature}/g, creature.creatureType)
+  .replace("{bonus}", bonus)
+  .replace(/{flavor}/g, lflavor)
+  .replace(/{sitem}/g, sname)
+  .replace(/{item}/g, ttname);
 
     const finalname = replaceItemInEffect(effectResult.modifier, item, damageType, flavor, offlavor);
 
@@ -337,18 +354,27 @@ if (filteredItems.length === 0) {
     const finalcost = Math.ceil((gold * effectCost) + itemCost);
 
 const outputBox = document.createElement("div");
-outputBox.classList.add("output-box", "result", "ammo-result", "item-result", "relative");
+outputBox.classList.add("output-box", "result", "ammo-result", "item-result", "relative", "pt-2");
 
 outputBox.innerHTML = `
-  <button class="aadd-button absolute top-1 right-12 w-16 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
+  <!-- Button container (absolute, top-right) -->
+<div class="absolute top-1 right-2 flex flex-col-reverse gap-1 sm:flex-row sm:items-center sm:gap-2">
+  <!-- Share / ">" button -->
+  <button
+    class="aadd-button h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
     onclick="handleShareButton(this)">
-    Share
+    <span class="inline sm:hidden">&gt;</span>
+    <span class="hidden w-16 sm:inline">Share</span>
   </button>
 
-  <button class="aadd-button absolute top-1 right-2 w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
-    onclick="handleSaveButton(this)">
+  <!-- Save "+" button -->
+  <button
+    class="aadd-button w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
+    onclick="handleSaveButton(this)"
+  >
     +
   </button>
+</div>
   <div class="rarity ${rarity.replace(" ", ".")} font-semibold text-lg mb-1">${finalname}</div>
   <p class="output-line italic">${bonus} ${item.name} x${randomNumber} - ${rarity}</p>
   <p class="output-line effect">${item.combat} ${item.properties}</p>

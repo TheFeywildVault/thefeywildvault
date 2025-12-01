@@ -730,18 +730,23 @@ function generateRandomScrolls() {
     scrollHTML.className = 'scroll-result item-result relative mb-4';
 
     scrollHTML.innerHTML = `
-     <button class="aadd-button absolute top-2 right-12 w-16 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
+ <div class="absolute top-1 right-2 flex flex-col-reverse gap-1 sm:flex-row sm:items-center sm:gap-2">
+     <button class="aadd-button h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
     onclick="handleShareButton(this)">
-    Share
-    </button>  
+      <span class="inline sm:hidden">&gt;</span>
+      <span class="hidden w-16 sm:inline">Share</span>
+     </button>  
     
-    <button class="aadd-button absolute top-2 right-2 w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
+      <button class="aadd-button w-8 h-8 text-white bg-gray-700 rounded hover:bg-gray-900 transition flex items-center justify-center font-bold"
         onclick="handleSaveButton(this)">
         +
       </button>
+  </div>
+
       <div class="popup-message hidden absolute top-12 right-4 bg-gray-500/90 text-white text-sm px-3 py-1 rounded shadow z-20">
         Item Saved to Inventory
       </div>
+
       <p><span style="color: ${colorClass};"><b>Scroll of ${scroll.spellname}${levelUpIndicator} ${scroll.concentration}</b></span></p>
       <p><i>Level ${scroll.level} Scroll, School of ${scroll.school}, ${scroll.type}${conditionText}${elementText}</i></p>
       <p><i><b>Casting Time:</b> ${scroll.casting} <b>Range:</b> ${scroll.range} <b>Components:</b> ${components} <b>Duration:</b> ${scroll.duration}</i></p>

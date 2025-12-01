@@ -115,7 +115,7 @@
 </header>
 
   <!-- HERO SECTION -->
-  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-12 text-center">
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 pt-12 pb-8 text-center">
     <div class="container mx-auto px-4">
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
             Let's Decide Your Fate
@@ -126,97 +126,136 @@
 
 <!-- TEXT INFO SECTION -->
 <section class="container mx-auto px-4 pb-6 text-left">
- <div class="md:col-span-3 px-4">
+  <!-- Mobile: accordion -->
+  <div class="md:hidden px-4">
+    <details class="border border-gray-300 dark:border-gray-700 rounded-lg p-4">
+      <summary class="flex items-center justify-between cursor-pointer">
+        <span class="text-xl font-semibold">
+          Deck of Many Things
+        </span>
+        <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
+          Tap to expand
+        </span>
+      </summary>
+
+      <div class="mt-3 text-gray-700 dark:text-gray-300">
+        <p>
+          <b></b>
+          Usually found in a box or pouch, this deck contains a number of cards made of ivory or vellum. 
+          Most (75 percent) of these decks have thirteen cards, but some have twenty-two. 
+          Over the centuries since the first Deck of Many Things was created, many have sought and failed to replicate it. 
+          But some have created new cards. 
+          An additional forty-four cards are known collectively as the Deck of Many More Things, comprising a total of 66 cards.
+          Use the filter to set the deck size (12, 22, or 66) before randomly determining cards drawn from the deck.
+          Before you draw a card, you must declare how many cards you intend to draw and then draw them randomly. 
+          Any cards drawn in excess of this number have no effect. 
+          Otherwise, as soon as you draw a card from the deck, its magic takes effect. 
+          You must draw each card no more than 1 hour after the previous draw. 
+          If you fail to draw the chosen number, the remaining number of cards fly from the deck on their own and take effect all at once.
+          Once a card is drawn, it disappears. Unless the card is the Fool or Jester, the card reappears in the deck, making it possible to draw the same card twice. 
+          (Once the Fool or Jester has left the deck, reroll on the table if that card comes up again.)
+        </p>
+      </div>
+    </details>
+  </div>
+
+  <!-- Desktop / larger screens: original layout -->
+  <div class="hidden md:block md:col-span-3 px-4">
     <h3 class="text-2xl font-semibold mb-2">
-    Deck of Many Things
-  </h3>
+      Deck of Many Things
+    </h3>
     <p class="text-gray-700 dark:text-gray-300">
-    <b></b>
-    With each subsequent spell you cast, the maximum threshold decrease by one that will result in a triggered wild magic effect. 
-    Once a wild magic surge triggers the maximum threshold is reset.
-    Ex. On your first spell if you roll 1d20 and get a 9, needing a 20, the wild magic surge will NOT trigger.
-    On your second spell if you roll 1d20 and get a 12, needing a 19 or 20, the wild magic surge will NOT trigger.
-    On your third spell if you roll 1d20 and get an 18, needing a 18-20, the wild magic surge WILL trigger.
-    The threshold is then reset back to 20 for your next spell.</p>
+      <b></b>
+      Usually found in a box or pouch, this deck contains a number of cards made of ivory or vellum. 
+      Most (75 percent) of these decks have thirteen cards, but some have twenty-two. 
+      Over the centuries since the first Deck of Many Things was created, many have sought and failed to replicate it. 
+      But some have created new cards. 
+      An additional forty-four cards are known collectively as the Deck of Many More Things, comprising a total of 66 cards.
+      Use the filter to set the deck size (12, 22, or 66) before randomly determining cards drawn from the deck.
+      Before you draw a card, you must declare how many cards you intend to draw and then draw them randomly. 
+      Any cards drawn in excess of this number have no effect. 
+      Otherwise, as soon as you draw a card from the deck, its magic takes effect. 
+      You must draw each card no more than 1 hour after the previous draw. 
+      If you fail to draw the chosen number, the remaining number of cards fly from the deck on their own and take effect all at once.
+      Once a card is drawn, it disappears. Unless the card is the Fool or Jester, the card reappears in the deck, making it possible to draw the same card twice. 
+      (Once the Fool or Jester has left the deck, reroll on the table if that card comes up again.)
+    </p>
   </div>
 </section>
 
+
 <!-- MAIN CONTENT WITH LEFT COLUMN -->
-<section class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+<section class="container mx-auto px-4 py-4 grid grid-cols-1 md:grid-cols-4 gap-4">
   
   <!-- Result Output (moved higher in the DOM) -->
   <div class="md:col-span-4">
     <!-- Generate Button full width above result -->
-<div class="mb-4 flex justify-center gap-x-4">
-  
-<select id="decksizeDropdown"
-  class="w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
-  <option value="" disabled selected hidden>Deck Size</option>
-  <option value="13 Cards">13 Cards</option>
-  <option value="22 Cards" selected>22 Cards</option>
-  <option value="66 Cards">66 Cards</option>
 
-</select>
+    <div class="mb-4 flex flex-col md:flex-row justify-center gap-4">
+
+  <select id="decksizeDropdown"
+    class="order-1 md:order-1 w-full md:w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
+    <option value="" disabled selected hidden>Deck Size</option>
+    <option value="13 Cards">13 Cards</option>
+    <option value="22 Cards" selected>22 Cards</option>
+    <option value="66 Cards">66 Cards</option>
+  </select>
 
   <select id="drawDropdown"
-  class="w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
-  <option value="" disabled selected hidden>How Many Cards?</option>
-  <option value="1" selected>1 Card</option>
-  <option value="2">2 Cards</option>
-  <option value="3">3 Cards</option>
-  <option value="4">4 Cards</option>
-  <option value="5">5 Cards</option>
-  <option value="6">6 Cards</option>
-  <option value="7">7 Cards</option>
-  <option value="8">8 Cards</option>
-  <option value="9">9 Cards</option>
-  <option value="10">10 Cards</option>
-</select>
+    class="order-2 md:order-2 w-full md:w-64 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-4 rounded">
+    <option value="" disabled selected hidden>How Many Cards?</option>
+    <option value="1" selected>1 Card</option>
+    <option value="2">2 Cards</option>
+    <option value="3">3 Cards</option>
+    <option value="4">4 Cards</option>
+    <option value="5">5 Cards</option>
+    <option value="6">6 Cards</option>
+    <option value="7">7 Cards</option>
+    <option value="8">8 Cards</option>
+    <option value="9">9 Cards</option>
+    <option value="10">10 Cards</option>
+  </select>
+
+  <button id="resetButton" onclick="resetDeck()"
+    class="order-3 md:order-6 w-full md:w-64 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
+    Reset Deck
+  </button>
+
+  <button id="clearDeckButton" onclick="clearTally()"
+    class="order-4 md:order-5 w-full md:w-64 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
+    Clear All Cards
+  </button> 
 
   <button id="generateFateButton" onclick="generatefate()"
-          class="w-64 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-4 rounded">
+    class="order-5 md:order-3 w-full md:w-64 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-4 rounded">
     Draw a Card
   </button>
 
   <button id="drawNextButton"
-        onclick="drawNextCard()"
-        class="w-64 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded hidden">
-  Draw Next
-</button>
+    onclick="drawNextCard()"
+    class="order-6 md:order-4 w-full md:w-64 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-4 rounded hidden">
+    Draw Next
+  </button>
 
-  <button id="clearDeckButton" onclick="clearTally()" class="w-64 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
-    Clear All Cards
-  </button> 
-
-  <button id="resetButton" onclick="resetDeck()" class="w-64 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
-    Reset Deck
-  </button> 
 </div>
 
-    <div id="deckResult" class="parchment-bg text-black px-10 py-6 rounded shadow-md w-full text-center text-4xl leading-snug min-h-[500px] flex flex-col justify-center"
-         style="line-height: 1.25; text-indent: 2px; min-height: 500px;">
+    <div id="deckResult"
+        class="parchment-bg text-black px-4 md:px-10 py-6 rounded shadow-md w-full text-center
+              text-xl md:text-4xl leading-snug min-h-[500px] flex flex-col justify-center"
+        style="line-height: 1.25; text-indent: 2px; min-height: 500px;">
       <p id="drawCounter" class="text-sm text-gray-600 dark:text-gray-400 mb-2 hidden">Draws Remaining: <span id="drawsRemaining">0</span></p>
-      <p id="placeholder-text" class="text-gray-500 italic">- Click "Draw" to test your fate -</p>
+      <p id="placeholder-text" class="text-gray-500 italic">Click "Draw" to test your fate</p>
     </div>
   </div>
 
 <!-- Tally Section (Hidden by Default) -->
 <div class="md:col-span-4">
- <div id="effectTally" class="hidden text-left parchment-bg text-black px-10 py-4 rounded shadow-md w-full text-base leading-snug mt-4">
+ <div id="effectTally" class="hidden text-left parchment-bg text-black px-10 py-4 rounded shadow-md w-full text-base leading-snug mt-2">
  <h3 class="font-bold underline text-left mb-2">Cards Drawn</h3>
 <div id="tallyContent" class="text-left"></div>
 </div>
 </div>
 
-  <!-- Loading GIF -->
-  <div id="gifDisplayContainer" class="hidden mt-4 md:col-span-4">
-    <img src="./gif/dice.GIF" alt="Loading" id="loadingGif">
-  </div>
-
-  <!-- Optional Text -->
-  <div class="mt-8 text-gray-600 dark:text-gray-300 md:col-span-4">
-    <!-- Add optional content here -->
-  </div>
 </section>
 
  
@@ -227,7 +266,7 @@
   
         <!-- Branding (2/5 columns) -->
         <div class="flex items-start space-x-4 md:col-span-2">
-          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-1" />
+          <img src="./img/favicon.ico" alt="The Feywild Vault logo" class="w-10 h-10 mt-2" />
           <div>
             <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Feywild Vault</h4>
             <p class="text-sm">Tools and content for D&D adventurers who wander the enchanted paths of the Feywild.</p>

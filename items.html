@@ -117,7 +117,7 @@
 </header>
 
   <!-- HERO SECTION -->
-  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 py-20 text-center">
+  <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 pt-12 pb-8 text-center">
     <div class="container mx-auto px-4">
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
             Thrandor's Emberforge & Armory
@@ -127,147 +127,164 @@
   </section>
 
 <!-- MAIN CONTENT WITH LEFT COLUMN -->
-<section class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+<section class="container mx-auto px-4 py-1 grid grid-cols-1 md:grid-cols-4 gap-4">
   
-<!-- Select All/Unselect All Controls -->
+  <!-- Select All/Unselect All Controls -->
   <aside class="space-y-4">
     
-   <div class="max-w-md p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md space-y-4">
+    <!-- Make this a flex column so we can reorder children -->
+    <div class="max-w-md p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex flex-col space-y-4">
 
-<!-- Generate Button full width -->
-<div class="mb-4">
-  <button id="generateButton" onclick="runSimulation()"
-          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
-    Generate Items
-  </button>
-</div>
+      <!-- Generate Button full width -->
+      <!-- Mobile: AFTER filters & curse (order-3), Desktop: FIRST (md:order-1) -->
+      <div class="order-3 md:order-1 mt-3 md:mt-0">
+        <button id="generateButton" onclick="runSimulation()"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+          Generate Items
+        </button>
+      </div>
 
-<!-- Inputs side-by-side container -->
-<div class="flex space-x-4 mb-4">
-  <!-- Level Dropdown -->
-  <div class="flex-1">
-    <label for="level" class="block text-sm font-medium">Level:</label>
-   <select id="level" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
-    <option value="17">17</option>
-    <option value="18">18</option>
-    <option value="19">19</option>
-    <option value="20">20</option>
-</select>
-  </div>
+      <!-- Inputs side-by-side container -->
+      <!-- Mobile: last (order-4), Desktop: second (md:order-2) -->
+      <div class="flex space-x-4 mb-4 order-4 md:order-2">
+        <!-- Level Dropdown -->
+        <div class="flex-1">
+          <label for="level" class="block text-sm font-medium">Level:</label>
+          <select id="level" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+          </select>
+        </div>
 
-  <!-- Number of Items Dropdown -->
-  <div class="flex-1">
-    <label for="runCount" class="block text-sm font-medium">Quantity:</label>
-   <select id="runCount" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-</select>
-  </div>
-</div>
+        <!-- Number of Items Dropdown -->
+        <div class="flex-1">
+          <label for="runCount" class="block text-sm font-medium">Quantity:</label>
+          <select id="runCount" class="w-full mt-1 px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
 
-<!--Curse Button-->
-<div>
-  <button id="curseButton" class="curse-button no-curses" onclick="toggleCurse()">
-    No Curses
-  </button>
-</div>
+      <!-- Curse Button -->
+      <!-- Mobile: after filters (order-2), Desktop: third (md:order-3) -->
+      <div class="order-2 md:order-3 mb-2 md:mb-0">
+        <button id="curseButton" class="curse-button no-curses" type="button" data-stage="0" onclick="toggleCurse()">
+          No Curses
+        </button>
+      </div>
 
-<p class="underline text-xl mb-1">
-  Item Filters
-  <span class="relative group cursor-pointer">
-    🛈
-    <span id="item-tooltip" class="absolute left-full ml-2 w-max max-w-xs text-sm bg-gray-800 text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 hidden group-hover:block">
-      No Filter Selected
-    </span>
-  </span>
-</p>
+      <!-- FILTERS BLOCK: accordion on mobile, inline on desktop -->
+      <!-- Mobile: FIRST (order-1), Desktop: fourth (md:order-4) -->
+      <div class="order-1 md:order-4">
+        <details
+          open
+          class="border border-gray-300 dark:border-gray-700 rounded-lg p-3
+                 md:border-none md:p-0 md:rounded-none"
+        >
+          <!-- Accordion header ONLY on small screens -->
+          <summary class="flex items-center justify-between cursor-pointer md:hidden">
+            <span class="text-lg font-semibold">Item Filters</span>
+            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
+              Tap to expand
+            </span>
+          </summary>
 
-<!--
-<div>
-  <button id="StandardHomebrewButton" class="StandardHomebrew-Button no-curses" onclick="toggleStandardHomebrew()">
-    Standard Items
-  </button>
-</div>
--->
+          <!-- Filters content; always visible on desktop -->
+          <div class="mt-3 md:mt-0">
 
-<div class="flex flex-col lg:flex-row gap-2 w-full mb-4">
-  <button onclick="selectAll()" class="flex-1 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
-    Select All
-  </button>
-  <button onclick="unselectAll()" class="flex-1 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
-    Unselect All
-  </button>
-</div>
+            <!-- Item Filters tooltip heading -->
+            <!-- Hidden on mobile (summary is the heading there), shown on md+ -->
+            <p class="underline text-xl mb-1 hidden md:block">
+              Item Filters
+              <span class="relative group cursor-pointer">
+                🛈
+                <span id="item-tooltip" class="absolute left-full ml-2 w-max max-w-xs text-sm bg-gray-800 text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 hidden group-hover:block">
+                  No Filter Selected
+                </span>
+              </span>
+            </p>
 
-<!-- Item Category Dropdown -->
-<div class="w-full" id="itemCategoryDropdown">
-  <label class="block mb-1 text-sm font-medium">Item Category:</label>
-  <button type="button" onclick="toggleDropdown('categoryDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
-  <span>Select Categories</span><span class="arrow">&#9662;</span>
-  </button>
-<div id="categoryDropdown" class="hidden mt-2 space-y-1 text-sm">
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Weapons" > Weapons</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Armor" > Armor</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Wondrous Item" > Wondrous Item</label>
-  </div>
-</div>
+            <!-- Select / Unselect All -->
+            <div class="flex flex-col lg:flex-row gap-2 w-full mb-4">
+              <button onclick="selectAll()" class="flex-1 px-4 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition">
+                Select All
+              </button>
+              <button onclick="unselectAll()" class="flex-1 px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700 transition">
+                Unselect All
+              </button>
+            </div>
 
-<!-- Item Type Dropdown -->
-<div class="w-full" id="itemTypeDropdown">
-  <label class="block mb-1 text-sm font-medium">Item Type:</label>
-  <button type="button" onclick="toggleDropdown('typeDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
-  <span>Select Types</span><span class="arrow">&#9662;</span>
-  </button>
-   <div id="typeDropdown" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Weapon"  > Simple</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Ranged Weapon"  > Simple Ranged</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Weapon"  > Martial</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Ranged Weapon"  > Martial Ranged</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Light Armor"  > Light</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Medium Armor"  > Medium</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Heavy Armor"  > Heavy</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Shield"  > Shield</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Quiver"  > Quiver</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Garment"  > Garment</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Staff"  > Staff</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Spell Focus"  > Spell Focus</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Container"  > Container</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Instrument"  > Instrument</label>
-    <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Misc."  > Misc.</label>
-  </div>
-</div>
+   <!-- Item Category Dropdown -->
+            <div class="w-full" id="itemCategoryDropdown">
+              <label class="block mb-2 mt-2 text-sm font-medium">Item Category:</label>
+              <button type="button" onclick="toggleDropdown('categoryDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+                <span>Select Categories</span><span class="arrow">&#9662;</span>
+              </button>
+              <div id="categoryDropdown" class="hidden mt-2 space-y-1 text-sm">
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Weapons" > Weapons</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Armor" > Armor</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox category" value="Wondrous Item" > Wondrous Item</label>
+              </div>
+            </div>
+
+            <div class="w-full" id="itemTypeDropdown">
+              <label class="block mb-2 mt-2 text-sm font-medium">Item Type:</label>
+              <button type="button" onclick="toggleDropdown('typeDropdown', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+                <span>Select Types</span><span class="arrow">&#9662;</span>
+              </button>
+              <div id="typeDropdown" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Weapon"  > Simple</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Simple Ranged Weapon"  > Simple Ranged</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Weapon"  > Martial</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Weapons" value="Martial Ranged Weapon"  > Martial Ranged</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Light Armor"  > Light</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Medium Armor"  > Medium</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Heavy Armor"  > Heavy</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Armor" value="Shield"  > Shield</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Quiver"  > Quiver</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Garment"  > Garment</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Staff"  > Staff</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Spell Focus"  > Spell Focus</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Container"  > Container</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Instrument"  > Instrument</label>
+                <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox type" data-parent="Wondrous Item" value="Misc."  > Misc.</label>
+              </div>
+            </div>
 
 <!-- Item Dropdown -->
-<div class="w-full" id="itemDropdown">
-  <label class="block mb-1 text-sm font-medium">Item:</label>
-  <button type="button" onclick="toggleDropdown('itemOptions', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
-  <span>Select Items</span><span class="arrow">&#9662;</span>
-  </button>
-  <div id="itemOptions" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
+            <div class="w-full" id="itemDropdown">
+              <label class="block mb-2 mt-2  text-sm font-medium">Item:</label>
+              <button type="button" onclick="toggleDropdown('itemOptions', this)" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded">
+                <span>Select Items</span><span class="arrow">&#9662;</span>
+              </button>
+              <div id="itemOptions" class="hidden mt-2 grid gap-2 space-y-1 text-sm">
     <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Iron Fist" > Iron Fist</label>
     <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Club" > Club</label>
     <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Simple Weapon" value="Dagger" > Dagger</label>
@@ -386,24 +403,19 @@
     <label class="block px-4 py-1"><input type="checkbox" class="dropdown-checkbox item" data-parent="Misc." value="Charm" > Charm</label>
     </div>
 </div>
+</div>
+        </details>
+        </div>
+</div>
 </aside>
 
- <!-- Item Result Output -->
-<div class="md:col-span-3 px-4">
-  <div id="result" class="parchment-bg text-black p-4 rounded shadow-md w-full" style="line-height: 1; text-indent: 2px; min-height: 550px;">
-  <p id="placeholder-text" class="text-gray-500 italic">- Click "Generate" to discover amazing magic items -</p>
-  </div>
-</div>
-
-  <!-- Loading GIF -->
-  <div id="gifDisplayContainer" class="hidden mt-4">
-    <img src="./gif/dice.GIF" alt="Loading" id="loadingGif">
+  <!-- Item Result Output -->
+  <div class="md:col-span-3 px-4">
+    <div id="result" class="parchment-bg text-black p-4 rounded shadow-md w-full" style="line-height: 1; text-indent: 2px; min-height: 550px;">
+      <p id="placeholder-text" class="text-gray-500 italic">Click "Generate" to discover amazing magic items</p>
+    </div>
   </div>
 
-  <!-- Optional Text beneath the generator-->
-  <div class="mt-8 text-gray-600 dark:text-gray-300">
-   
-  </div>
 </section>
  
   <!-- FOOTER -->

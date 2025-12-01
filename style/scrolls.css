@@ -46,9 +46,8 @@
 #placeholder-text {
   color: #3f29008f; /* Tailwind's gray-500 */
   font-style: italic;
-  font-size: 2rem; /* roughly text-xl */
   align-items: center;         /* vertical centering */
   justify-content: center;     /* horizontal centering */
   text-align: center;
-  padding: 300px 0px 10px 10px; /* top, right, bottom, left */
+  padding: 0px 0px 10px 10px; /* top, right, bottom, left */
 }

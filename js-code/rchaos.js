@@ -943,18 +943,18 @@ function updateEffectTally() {
     const isLongRestCombo = duration === "Long Rest";
 
     const durationDisplayNames = {
-      "Immediate": "Instantaneous Effects",
-      "Minute": "Minutely Effects",
-      "Hour": "Hourly Effect",
-      "Short Rest": "Short Rest Effects",
-      "Long Rest": "Long Rest Effects",
-      "Permanent": "Permanent Effects",
-      "Trigger": "Triggered Effects",
+      "Immediate": "Immediate",
+      "Minute": "Minutely",
+      "Hour": "Hourly",
+      "Short Rest": "Short Rest",
+      "Long Rest": "Long Rest",
+      "Permanent": "Permanent",
+      "Trigger": "Triggered",
       "Unknown": "Unknown Duration"
     };
 
     const durationButtonLabels = {
-      "Immediate": "Clear Instantaneous",
+      "Immediate": "Clear Immediate",
       "Minute": "Clear Minutely",
       "Hour": "Clear Hourly",
       "Short Rest": "Clear Short Rest",
@@ -1279,49 +1279,55 @@ function generatecontrolledchaos() {
 
   window.controlledChaosOptions = [effect1, effect2];
 
-  const resultBox = document.getElementById("chaosResult");
-  resultBox.innerHTML = `
-    <div class="controlled-chaos-option" style="position: relative; margin-bottom: 1rem; padding: 1rem;">
-      <div class="inline-block relative" style="margin-right: 1rem;">
-        <strong class="block ${effect1.colorClass}" style="font-size: 3rem;">${effect1.name}</strong>
-        <div class="absolute h-[2px] bg-[rgb(165,112,42)] rounded" style="bottom: 6px; left: 50%; transform: translateX(-50%); width: calc(100% + 20px);"></div>
-      </div>
-      <button style="
+const resultBox = document.getElementById("chaosResult");
+resultBox.innerHTML = `
+  <div class="controlled-chaos-option" style="position: relative; margin-bottom: 1rem; padding: 1rem;">
+    <div class="inline-block relative" style="margin-right: 1rem;">
+      <!-- removed inline font-size -->
+      <strong class="block ${effect1.colorClass}">${effect1.name}</strong>
+      <div class="absolute h-[2px] bg-[rgb(165,112,42)] rounded" style="bottom: 6px; left: 50%; transform: translateX(-50%); width: calc(100% + 20px);"></div>
+    </div>
+    <button
+      class="chaos-choose-btn"
+      style="
         position: absolute;
         right: 5rem;
         top: 1.5rem;
-        font-size: 2rem;
         background-color: #d1d5db;
         border-radius: 0.5rem;
         padding: 0.25rem 0.5rem;
         border: none;
         cursor: pointer;"
-        onclick="chooseControlledChaos(0)">
-        Choose
-      </button>
-      <p>${effect1.effect}</p>
+      onclick="chooseControlledChaos(0)">
+       <span class="hidden md:inline">Choose</span>
+       <span class="inline md:hidden">+</span>
+    </button>
+    <p>${effect1.effect}</p>
+  </div>
+  <div class="controlled-chaos-option" style="position: relative; padding: 1rem;">
+    <div class="inline-block relative" style="margin-right: 1rem;">
+      <!-- removed inline font-size -->
+      <strong class="block ${effect2.colorClass}">${effect2.name}</strong>
+      <div class="absolute h-[2px] bg-[rgb(165,112,42)] rounded" style="bottom: 6px; left: 50%; transform: translateX(-50%); width: calc(100% + 20px);"></div>
     </div>
-    <div class="controlled-chaos-option" style="position: relative; padding: 1rem;">
-      <div class="inline-block relative" style="margin-right: 1rem;">
-        <strong class="block ${effect2.colorClass}" style="font-size: 3rem;">${effect2.name}</strong>
-        <div class="absolute h-[2px] bg-[rgb(165,112,42)] rounded" style="bottom: 6px; left: 50%; transform: translateX(-50%); width: calc(100% + 20px);"></div>
-      </div>
-      <button style="
+    <button
+      class="chaos-choose-btn"
+      style="
         position: absolute;
         right: 5rem;
         top: 1.5rem;
-        font-size: 2rem;
         background-color: #d1d5db;
         border-radius: 0.5rem;
         padding: 0.25rem 0.5rem;
         border: none;
         cursor: pointer;"
-        onclick="chooseControlledChaos(1)">
-        Choose
-      </button>
-      <p>${effect2.effect}</p>
-    </div>
-  `;
+      onclick="chooseControlledChaos(1)">
+       <span class="hidden md:inline">Choose</span>
+       <span class="inline md:hidden">+</span>
+    </button>
+    <p>${effect2.effect}</p>
+  </div>
+`;
 
   const placeholder = document.getElementById('placeholder-text');
   if (placeholder) placeholder.style.display = 'none';

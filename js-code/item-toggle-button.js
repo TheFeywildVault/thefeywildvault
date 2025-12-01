@@ -1,18 +1,36 @@
-  function toggleCurse() {
-    const button = document.getElementById('curseButton');
-    button.classList.remove('no-curses', 'some-curses', 'all-cursed'); // Reset
+function toggleCurse() {
+  const button = document.getElementById('curseButton');
+  if (!button) return;
 
-    if (button.textContent === 'No Curses') {
-      button.classList.add('some-curses');
-      button.textContent = 'Some Curses';
-    } else if (button.textContent === 'Some Curses') {
-      button.classList.add('all-cursed');
-      button.textContent = 'All Cursed';
-    } else {
-      button.classList.add('no-curses');
-      button.textContent = 'No Curses';
-    }
+  // Clean up previous state classes
+  button.classList.remove('no-curses', 'some-curses', 'all-cursed');
+
+  const label = button.textContent.trim();
+
+  if (label === 'No Curses') {
+    // 0 -> 1 (Some Curses)
+    button.classList.add('some-curses');
+    button.textContent = 'Some Curses';
+    window.curseStage = 1;
+    button.dataset.stage = "1"; // optional, but keeps HTML in sync too
+
+  } else if (label === 'Some Curses') {
+    // 1 -> 2 (All Cursed)
+    button.classList.add('all-cursed');
+    button.textContent = 'All Cursed';
+    window.curseStage = 2;
+    button.dataset.stage = "2";
+
+  } else {
+    // 'All Cursed' or anything else -> 0 (No Curses)
+    button.classList.add('no-curses');
+    button.textContent = 'No Curses';
+    window.curseStage = 0;
+    button.dataset.stage = "0";
   }
+
+  console.log('toggleCurse -> window.curseStage =', window.curseStage);
+}
 
   function toggleStandardHomebrew() {
     const button = document.getElementById('StandardHomebrewButton');

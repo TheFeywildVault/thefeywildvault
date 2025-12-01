@@ -9,20 +9,55 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+/* ✅ Default = small screens (smaller text) */
 #placeholder-text {
   color: #3f29008f; /* Tailwind's gray-500 */
   font-style: italic;
-  font-size: 3rem; /* roughly text-xl */
-  align-items: center;         /* vertical centering */
-  justify-content: center;     /* horizontal centering */
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 10px 0px 10px 10px; /* top, right, bottom, left */
+  padding: 10px 0px 10px 10px;
 }
 
-#chaosResult {
-  text-align: center;
-  font-size: 3rem;
-  line-height: 1;
+/* Name text default (small screens) */
+#chaosResult strong {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;      /* ⬅️ was 1.75rem, now 1rem for small screens */
+  padding-bottom: 0.25rem;
+}
+
+/* Choose button default (small screens) */
+.chaos-choose-btn {
+  font-size: 1rem;      /* ⬅️ small screen size */
+}
+
+/* Small screens: push "Choose" buttons further right */
+@media (max-width: 767px) {
+  .chaos-choose-btn {
+    right: -1.5rem !important;  /* adjust this value to taste */
+  }
+}
+
+/* ✅ Larger screens: keep your original big text */
+@media (min-width: 768px) {
+  #placeholder-text {
+    font-size: 3rem;
+  }
+
+  #chaosResult {
+    font-size: 3rem;
+  }
+
+  #chaosResult strong {
+    font-size: 3rem;    /* ⬅️ large screen size for names */
+  }
+
+  .chaos-choose-btn {
+    font-size: 2rem;    /* ⬅️ large screen size for "Choose" buttons */
+  }
 }
 
 #chaosNameWrapper {
@@ -35,11 +70,26 @@
   position: relative;
   display: inline-block;
   margin-bottom: 0.5rem;
-  font-size: 3rem;
+  font-size: 1.75rem;
   padding-bottom: 0.25rem;
 }
 
-/* Use the custom property to set the underline width */
+/* ✅ Larger screens: keep your original big 3rem text */
+@media (min-width: 768px) {
+  #placeholder-text {
+    font-size: 3rem;
+  }
+
+  #chaosResult {
+    font-size: 3rem;
+  }
+
+  #chaosResult strong {
+    font-size: 3rem;
+  }
+}
+
+/* underline + colors unchanged */
 #chaosResult strong::after {
   content: "";
   position: absolute;
@@ -72,6 +122,6 @@
 }
 
 .trigger-list {
-  padding-left: 0.25rem;   /* Reduce left padding */
-  margin-left: -1.75rem;   /* Pull list left to align "X" with other bullets */
+  padding-left: 0.25rem;
+  margin-left: -1.75rem;
 }
