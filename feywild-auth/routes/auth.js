@@ -93,7 +93,7 @@ router.post('/login', async (req, res) => {
         profilePic: user.profilePic 
           ? user.profilePic.startsWith('http')
               ? user.profilePic 
-              : `https://feywildvault-backend.onrender.com${user.profilePic}`
+              : `https://api.thefeywildvault.com${user.profilePic}`
           : null
       }
     });
@@ -129,7 +129,7 @@ router.get('/user', async (req, res) => {
   if (user.profilePic) {
     profilePic = user.profilePic.startsWith('http')
       ? user.profilePic
-      : `https://feywildvault-backend.onrender.com${user.profilePic}`;
+      : `https://api.thefeywildvault.com${user.profilePic}`;
   }
 
   res.json({
@@ -175,7 +175,7 @@ router.post('/account/update', upload.single('avatar'), async (req, res) => {
   const updates = {};
   if (req.body.displayName) updates.displayName = req.body.displayName;
   if (req.file) {
-    updates.profilePic = `https://feywildvault-backend.onrender.com/uploads/avatars/${req.file.filename}`;
+    updates.profilePic = `https://api.thefeywildvault.com/uploads/avatars/${req.file.filename}`;
   }
 
   try {
