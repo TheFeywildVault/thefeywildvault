@@ -10,7 +10,7 @@
     const displayName = document.getElementById('displayName').value;
 
     try {
-      const res = await fetch('https://feywildvault-backend.onrender.com/api/register', {
+      const res = await fetch('https://api.thefeywildvault.com/api/register', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -28,9 +28,9 @@
         return;
       }
 
-      // Success
-      window.location.href = '/login.html?registered=1';
-
+      // Success – redirect to login in the SAME folder as register.html
+window.location.href = 'login?registered=1';
+      
     } catch (err) {
       alert('Network error: ' + err.message);
     }

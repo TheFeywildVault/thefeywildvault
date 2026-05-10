@@ -4,14 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Feywild Vault</title>
+<!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tell Tailwind to use the `.dark` class for dark mode -->
   <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+
+  <!-- Force dark mode on every device -->
+  <script>
+    document.documentElement.classList.add('dark');
+    try {
+      localStorage.setItem('theme', 'dark');
+    } catch (e) {
+      // ignore if storage is blocked
     }
   </script>
+
   <style>
     @layer utilities {
       @keyframes colorFade {
@@ -139,9 +151,10 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
             Discover the Magic of The Feywild Vault
         </h2>
-      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">
-            Curated resources, magical items, creatures, and generators for your tabletop adventures.
-      </p>
+      <p class="text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
+            Exciting magic items and other generators for your tabletop adventures.
+            <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new items aded and the creation of new random generators!
+          </p>
     </div>
   </section>
 
@@ -172,19 +185,19 @@
         <!-- Card 4 - Blue Glow (Optional Extra Card) -->
         <a href="./scrolls" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-blue-300 dark:border-blue-500 hover:shadow-blue-400/50 hover:shadow-xl transition-all duration-300">
           <h4 class="text-xl font-bold text-blue-700 dark:text-blue-300 mb-2">The Library</h4>
-          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+          <p class="text-gray-600 dark:text-gray-400">Browse our vast collection of scrolls, good for any situtation.</p>
         </a>
 
         <!-- Card 5 - Orange Glow -->
         <a href="./ammunition" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-orange-300 dark:border-orange-500 hover:shadow-orange-400/50 hover:shadow-xl transition-all duration-300">
           <h4 class="text-xl font-bold text-orange-700 dark:text-orange-300 mb-2">Ammunition</h4>
-          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+          <p class="text-gray-600 dark:text-gray-400">Browse our arsenal of enchanted projectiles, perfect for any ranged weapon.</p>
         </a>
 
          <!-- Card 6 -->
         <a href="./" class="block bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-purple-300 dark:border-purple-500 hover:shadow-purple-400/50 hover:shadow-xl transition-all duration-300">
           <h4 class="text-xl font-bold text-purple-700 dark:text-purple-300 mb-2">Encounters - Coming Soon</h4>
-          <p class="text-gray-600 dark:text-gray-400">Browse our expansive collection of scrolls, good for any situtation.</p>
+          <p class="text-gray-600 dark:text-gray-400">Crazy world interactions are around every corner!</p>
         </a>
 
          <!-- Card 7 - Red Glow -->
@@ -323,7 +336,7 @@
 
     <!-- Link Button -->
     <a id="patreonLinkBtn"
-      href="https://feywildvault-backend.onrender.com/api/patreon/link"
+      href="https://api.thefeywildvault.com/api/patreon/link"
       class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
       <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
       Link Patreon Account

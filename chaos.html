@@ -5,13 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Feywild Vault</title>
   <link rel="stylesheet" href="./style/chaos.css">
+<!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tell Tailwind to use the `.dark` class for dark mode -->
   <script>
-    // Optional: Toggle dark mode on load
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+
+  <!-- Force dark mode on every device -->
+  <script>
+    document.documentElement.classList.add('dark');
+    try {
+      localStorage.setItem('theme', 'dark');
+    } catch (e) {
+      // ignore if storage is blocked
     }
   </script>
 </head>
@@ -379,7 +389,7 @@
 
     <!-- Link Button -->
     <a id="patreonLinkBtn"
-      href="https://feywildvault-backend.onrender.com/api/patreon/link"
+      href="https://api.thefeywildvault.com/api/patreon/link"
       class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
       <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
       Link Patreon Account

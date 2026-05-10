@@ -880,7 +880,7 @@ let returnedEffects = [];
 async function loadReturnedEffects() {
   try {
     const res = await fetch(
-      "https://feywildvault-backend.onrender.com/api/returned-effects",
+      "https://api.thefeywildvault.com/api/returned-effects",
       { credentials: "include" }        // ⬅ send session cookie
     );
 
@@ -1019,7 +1019,7 @@ function updateEffectTally() {
 async function saveReturnedEffects() {
   try {
     const res = await fetch(
-      "https://feywildvault-backend.onrender.com/api/returned-effects",
+      "https://api.thefeywildvault.com/api/returned-effects",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("loginPassword").value;
 
   try {
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/login", {
+    const res = await fetch("https://api.thefeywildvault.com/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -16,14 +16,17 @@ loginForm.addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
-    if (res.ok) {
-      // Redirect on successful login
-      const params = new URLSearchParams(window.location.search);
-      const redirectUrl = params.get("redirect") || "/index.html";
-      window.location.href = redirectUrl;
+   if (res.ok) {
+  const params = new URLSearchParams(window.location.search);
+  const redirectParam = params.get("redirect");
 
-    
-    } else {
+  // If a redirect param is present, use it as-is.
+  // Otherwise send the user to the main page inside /TheFeywildVault.
+  const redirectUrl = redirectParam || "/TheFeywildVault/";
+
+  window.location.href = redirectUrl;
+
+} else {
       alert(data.error || "Login failed");
       console.error("Login error:", data.error);
     }

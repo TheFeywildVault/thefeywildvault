@@ -4,17 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Feywild Vault</title>
+
+  <!-- 1) Load Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 2) Configure Tailwind to use class-based dark mode -->
   <script>
-    // Optional: Toggle dark mode on load
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    tailwind.config = {
+      darkMode: 'class'
+    };
   </script>
 
+  <!-- 3) (Optional) Persist "dark" in localStorage for other pages -->
+  <script>
+    document.documentElement.classList.add('dark');
+    try {
+      localStorage.setItem('theme', 'dark');
+    } catch (e) {
+      // Storage might be blocked, that's fine
+    }
+  </script>
 </head>
+
+
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
 
 <!-- NAVBAR -->
@@ -252,7 +264,7 @@
 
     <!-- Link Button -->
     <a id="patreonLinkBtn"
-      href="https://feywildvault-backend.onrender.com/api/patreon/link"
+      href="https://api.thefeywildvault.com/api/patreon/link"
       class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
       <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
       Link Patreon Account
@@ -348,9 +360,6 @@
 </script>
 <script src="/js-code/patreon-access.js" defer></script>
 <script src="/js-code/account.js?v=3" defer></script>
-<script src="/js-code/item-toggle-button.js" defer></script>
-<script src="/js-code/item-filter-tooltip.js" defer></script>
-<script src="/js-code/item-type-selection.js" defer></script>
 <script src="/js-code/favicon.js" defer></script>
 
 </body>

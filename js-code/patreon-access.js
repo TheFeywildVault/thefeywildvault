@@ -5,7 +5,7 @@ function patreonReady() {
 // Ensure CurrentUser is synced across pages
 (async function initUser() {
   try {
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/user", {
+    const res = await fetch("https://api.thefeywildvault.com/api/user", {
       credentials: "include"
     });
 
@@ -33,7 +33,8 @@ function patreonReady() {
   // true = allowed, false = not allowed
 
  window.PatreonOverrideRules = {
-  "VaultGuardian": { save: true, share: true }
+  "VaultGuardian": { save: true, share: true },
+  "havamere": { save: true, share: true }
 };
 
 // -------------------------

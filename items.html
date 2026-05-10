@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-K2VPN3WW');</script>
+      <!-- End Google Tag Manager -->
+
+      <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JR9L2T5LXY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JR9L2T5LXY');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Feywild Vault</title>
   <link rel="stylesheet" href="./style/cursebutton.css">
   <link rel="stylesheet" href="./style/dicegif.css">
   <link rel="stylesheet" href="./style/rmig.css">
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tell Tailwind to use the `.dark` class for dark mode -->
   <script>
-    // Optional: Toggle dark mode on load
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
+
+  <!-- Force dark mode on every device -->
+  <script>
+    document.documentElement.classList.add('dark');
+    try {
+      localStorage.setItem('theme', 'dark');
+    } catch (e) {
+      // ignore if storage is blocked
     }
   </script>
 </head>
 
 <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300 font-sans">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2VPN3WW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
 <header class="bg-white dark:bg-gray-800 shadow-md">
@@ -122,7 +156,9 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
             Thrandor's Emberforge & Armory
           </h2>
-      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">Our shop is fully stocked with any equipment you may need on your next adventure, offering millions of unique items for your to explore.</p>
+      <p class="text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">Our shop is fully stocked with millions of items for you to use on your next adventure.
+        <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new items aded and the creation of new random generators!
+      </p>
     </div>
   </section>
 
@@ -221,10 +257,10 @@
 
             <!-- Item Filters tooltip heading -->
             <!-- Hidden on mobile (summary is the heading there), shown on md+ -->
-            <p class="underline text-xl mb-1 hidden md:block">
+            <p class="text-xl mb-1 hidden md:block">
               Item Filters
-              <span class="relative group cursor-pointer">
-                🛈
+              <span class="relative group cursor-pointer inline-flex items-center justify-center w-5 h-5 text-xs text-white bg-blue-500 rounded-full">
+                  ?
                 <span id="item-tooltip" class="absolute left-full ml-2 w-max max-w-xs text-sm bg-gray-800 text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 hidden group-hover:block">
                   No Filter Selected
                 </span>
@@ -240,6 +276,54 @@
                 Unselect All
               </button>
             </div>
+
+<!-- Item Rarity Dropdown -->
+   <!-- Item Rarity Dropdown -->
+<div class="w-full" id="itemRarityDropdown">
+  <div class="flex items-center gap-2 mb-2 mt-2">
+    <label class="text-sm font-medium">Item Rarity:</label>
+
+    <!-- Helper Text Bubble -->
+    <div class="relative group cursor-help">
+      <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-500 rounded-full">
+        ?
+      </span>
+
+      <!-- Tooltip -->
+      <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-72 p-3 text-xs text-white bg-gray-900 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+        Leave all rarities unchecked to use the default level-based rarity selection.
+        If one or more rarities are selected, the generator will randomly choose
+        from only the selected rarities.
+      </div>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    onclick="toggleDropdown('rarityDropdown', this)"
+    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-left rounded"
+  >
+    <span>Select Rarity</span><span class="arrow">&#9662;</span>
+  </button>
+
+  <div id="rarityDropdown" class="hidden mt-2 space-y-1 text-sm">
+    <label class="block px-4 py-1">
+      <input type="checkbox" class="dropdown-checkbox rarity" value="Legendary"> Legendary
+    </label>
+    <label class="block px-4 py-1">
+      <input type="checkbox" class="dropdown-checkbox rarity" value="Very Rare"> Very Rare
+    </label>
+    <label class="block px-4 py-1">
+      <input type="checkbox" class="dropdown-checkbox rarity" value="Rare"> Rare
+    </label>
+    <label class="block px-4 py-1">
+      <input type="checkbox" class="dropdown-checkbox rarity" value="Uncommon"> Uncommon
+    </label>
+    <label class="block px-4 py-1">
+      <input type="checkbox" class="dropdown-checkbox rarity" value="Common"> Common
+    </label>
+  </div>
+</div>
 
    <!-- Item Category Dropdown -->
             <div class="w-full" id="itemCategoryDropdown">
@@ -524,7 +608,7 @@
 
     <!-- Link Button -->
     <a id="patreonLinkBtn"
-      href="https://feywildvault-backend.onrender.com/api/patreon/link"
+      href="https://api.thefeywildvault.com/api/patreon/link"
       class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded">
       <img src="/img/patreonlogo.png" alt="Patreon" class="w-5 h-5 mr-2">
       Link Patreon Account

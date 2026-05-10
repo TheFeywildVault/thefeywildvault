@@ -49,7 +49,7 @@ if (signupLink) {
 
   // Try to load logged-in user
  try {
-  const res = await fetch("https://feywildvault-backend.onrender.com/api/user", { method: "GET", credentials: "include" });
+  const res = await fetch("https://api.thefeywildvault.com/api/user", { method: "GET", credentials: "include" });
   if (res.ok) {
     const { user } = await res.json();
 
@@ -100,7 +100,7 @@ if (signupLink) {
     }
 
   logoutButton.addEventListener("click", () => {
-    fetch("https://feywildvault-backend.onrender.com/api/logout", { method: "POST", credentials: "include" }).then(() => window.location.reload());
+    fetch("https://api.thefeywildvault.com/api/logout", { method: "POST", credentials: "include" }).then(() => window.location.reload());
   });
 
   // Account Modal
@@ -114,7 +114,7 @@ if (signupLink) {
   accountSettingsLink.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/user", { credentials: "include" });
+    const res = await fetch("https://api.thefeywildvault.com/api/user", { credentials: "include" });
     if (res.ok) {
       const { user } = await res.json();
 
@@ -140,7 +140,7 @@ if (signupLink) {
     formData.append("displayName", newDisplayName);
     if (avatarFile) formData.append("avatar", avatarFile);
 
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/account/update", {
+    const res = await fetch("https://api.thefeywildvault.com/api/account/update", {
       method: "POST",
       body: formData,
       credentials: "include",
@@ -176,7 +176,7 @@ if (uploadButton) {
     const formData = new FormData();
     formData.append("avatar", selectedFile);
 
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/account/avatar", {
+    const res = await fetch("https://api.thefeywildvault.com/api/account/avatar", {
       method: "POST",
       body: formData,
       credentials: "include"
@@ -216,7 +216,7 @@ if (uploadButton) {
 
   async function loadFriendsList() {
     try {
-      const res = await fetch("https://feywildvault-backend.onrender.com/api/friends", { credentials: "include" });
+      const res = await fetch("https://api.thefeywildvault.com/api/friends", { credentials: "include" });
       if (!res.ok) throw new Error("Failed to fetch friends");
       const { friends } = await res.json();
 
@@ -263,7 +263,7 @@ if (uploadButton) {
 
   async function removeFriend(username) {
     try {
-      const res = await fetch("https://feywildvault-backend.onrender.com/api/friends/remove", {
+      const res = await fetch("https://api.thefeywildvault.com/api/friends/remove", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -287,7 +287,7 @@ if (uploadButton) {
     friendSearchMessage.classList.add("hidden");
 
     try {
-      const res = await fetch("https://feywildvault-backend.onrender.com/api/friends/add", {
+      const res = await fetch("https://api.thefeywildvault.com/api/friends/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -363,7 +363,7 @@ async function loadCourierInbox() {
   inboxList.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Loading...</p>`;
 
   try {
-    const res = await fetch("https://feywildvault-backend.onrender.com/api/courier/inbox", {
+    const res = await fetch("https://api.thefeywildvault.com/api/courier/inbox", {
       method: "GET",
       credentials: "include",
     });
@@ -406,7 +406,7 @@ async function loadCourierInbox() {
 // ---------- Patreon helper functions (REPLACE existing functions with this) ----------
 async function refreshPatreonStatus() {
   try {
-    const res = await fetch('https://feywildvault-backend.onrender.com/api/patreon/status', {credentials: 'include'});
+    const res = await fetch('https://api.thefeywildvault.com/api/patreon/status', {credentials: 'include'});
     if (!res.ok) {
       console.warn('Patreon status returned non-OK');
       setPatreonUI(null);
