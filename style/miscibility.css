@@ -1,0 +1,31 @@
+.miscibility-result {
+  background-color: #fff5e6; /* light parchment */
+  border-left: 5px solid #7a0085; /* brown/gold instead of mishap red */
+  padding: 20px;
+  margin-top: 0px;
+  margin-left: -15px;
+  text-align: center;
+}
+
+.miscibility-name {
+  display: block;
+  font-size: 2rem;
+  color: #7a0085;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.miscibility-label {
+  display: block;
+  font-size: 1rem;
+  color: #7a0085;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.miscibility-effect {
+  display: block;
+  font-size: 1.3rem;
+  color: #7a0085;
+  line-height: 1.4;
+}
