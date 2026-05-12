@@ -92,11 +92,21 @@ if (!subcategory) {
     subcategory = "Armor";
   } else if (cat.includes('scroll')) {
     subcategory = "Scroll";
-  } else if (cat.includes('arrow') || cat.includes('bolt') || cat.includes('dart') || cat.includes('ammunition')) {
+  } else if (
+    cat.includes('potion') ||
+    cat.includes('poison') ||
+    cat.includes('oil')
+  ) {
+    subcategory = "Potion";
+  } else if (
+    cat.includes('arrow') ||
+    cat.includes('bolt') ||
+    cat.includes('dart') ||
+    cat.includes('ammunition')
+  ) {
     subcategory = "Ammunition";
   } else {
-    // fallback
-    subcategory = "Wondrous Items";
+  subcategory = "Wondrous Items";
   }
 }
 
@@ -164,6 +174,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Weapons: [],
     Armor: [],
     "Wondrous Items": [],
+    Potions: [],
     Scrolls: [],
     Ammunition: [],
   };
@@ -184,27 +195,45 @@ storedItems.forEach((itemObj, index) => {
   const armorExact = ["light armor", "medium armor", "heavy armor", "shield"];
   const wondrousExact = ["garment", "jewelry", "staff", "quiver", "spell focus", "container", "instrument", "misc"];
 
-  if (weaponExact.includes(catLower) || catLower.includes("weapon")) {
-    subcat = "Weapon";
-  } else if (armorExact.some(a => catLower.includes(a)) || catLower.includes("armor") || catLower.includes("shield")) {
-    // allow "Light Armor", "light armor (mithral)", "armor, light", etc.
-    subcat = "Armor";
-  } else if (wondrousExact.includes(catLower) || wondrousExact.some(w => catLower.includes(w))) {
-    subcat = "Wondrous Items";
-  } else if (catLower.includes("scroll")) {
-    subcat = "Scroll";
-  } else if (catLower.includes("arrow") || catLower.includes("bolt") || catLower.includes("dart") || catLower.includes("ammunition")) {
-    subcat = "Ammunition";
-  } else {
-    subcat = "Wondrous Items";
-  }
+if (weaponExact.includes(catLower) || catLower.includes("weapon")) {
+  subcat = "Weapon";
+} else if (
+  armorExact.some(a => catLower.includes(a)) ||
+  catLower.includes("armor") ||
+  catLower.includes("shield")
+) {
+  subcat = "Armor";
+} else if (catLower.includes("scroll")) {
+  subcat = "Scroll";
+} else if (
+  catLower.includes("potion") ||
+  catLower.includes("poison") ||
+  catLower.includes("oil")
+) {
+  subcat = "Potion";
+} else if (
+  catLower.includes("arrow") ||
+  catLower.includes("bolt") ||
+  catLower.includes("dart") ||
+  catLower.includes("ammunition")
+) {
+  subcat = "Ammunition";
+} else if (
+  wondrousExact.includes(catLower) ||
+  wondrousExact.some(w => catLower.includes(w))
+) {
+  subcat = "Wondrous Items";
+} else {
+  subcat = "Wondrous Items";
+}
 
   // push into arrays (use the same bucket names as your categories object)
   if (subcat === "Weapon") categories.Weapons.push({ ...itemObj, index });
-  else if (subcat === "Armor") categories.Armor.push({ ...itemObj, index });
-  else if (subcat === "Scroll") categories.Scrolls.push({ ...itemObj, index });
-  else if (subcat === "Ammunition") categories.Ammunition.push({ ...itemObj, index });
-  else categories["Wondrous Items"].push({ ...itemObj, index });
+else if (subcat === "Armor") categories.Armor.push({ ...itemObj, index });
+else if (subcat === "Scroll") categories.Scrolls.push({ ...itemObj, index });
+else if (subcat === "Potion") categories.Potions.push({ ...itemObj, index });
+else if (subcat === "Ammunition") categories.Ammunition.push({ ...itemObj, index });
+else categories["Wondrous Items"].push({ ...itemObj, index });
 });
 
 
