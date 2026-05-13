@@ -24,15 +24,16 @@ router.post('/register', async (req, res) => {
   const { username, password, displayName } = req.body;
   try {
    const hashed = await bcrypt.hash(password, 12);
+
 const user = await User.create({
   username,
   password: hashed,
   displayName
 });
 
-    req.session.userId = user._id;
-    res.json({ user: { username: user.username, displayName: user.displayName } });
-  } catch (err) {
+res.json({ user: { username: user.username, displayName: user.displayName } });
+  
+} catch (err) {
   console.error('Register error:', err);
   if (err.code === 11000) { // Mongo duplicate key error code
     return res.status(400).json({ error: 'Username already exists' });

@@ -28,8 +28,11 @@
         return;
       }
 
-      // Success – redirect to login in the SAME folder as register.html
-window.location.href = 'login?registered=1';
+      // Success – redirect to login and preserve the original destination
+      const params = new URLSearchParams(window.location.search);
+      const redirectParam = params.get("redirect") || "/TheFeywildVault/index.html";
+
+      window.location.href = `login?registered=1&redirect=${encodeURIComponent(redirectParam)}`;
       
     } catch (err) {
       alert('Network error: ' + err.message);

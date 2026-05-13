@@ -1,0 +1,41 @@
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Chrome, Edge, Safari */
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #9333ea;
+  border: 2px solid white;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+/* Firefox */
+.range-slider::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #9333ea;
+  border: 2px solid white;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+/* Hide default tracks */
+.range-slider::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+.range-slider::-moz-range-track {
+  background: transparent;
+}

@@ -22,7 +22,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   // If a redirect param is present, use it as-is.
   // Otherwise send the user to the main page inside /TheFeywildVault.
-  const redirectUrl = redirectParam || "/TheFeywildVault/";
+  const redirectUrl = redirectParam || "/TheFeywildVault/index.html";
 
   window.location.href = redirectUrl;
 
