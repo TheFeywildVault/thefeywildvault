@@ -16,21 +16,34 @@ document.addEventListener("DOMContentLoaded", async () => {
   const friendsSettingsLink = document.getElementById("friendsSettingsLink");
   const courierLink = document.getElementById("courierLink");
 
-if (loginLink) {
-  // Get clean path without leaking cPanel's internal file path
+function getSafeRedirectPath() {
   let cleanPath = location.pathname + location.search;
 
-  // Remove internal path if Apache leaked it (cPanel servers do this)
-  cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html\/TheFeywildVault/, "");
+  // Remove internal cPanel path if Apache leaks it
+  cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html/, "");
 
-  // Ensure redirect always stays inside /TheFeywildVault/
-  loginLink.href = `./login?redirect=${encodeURIComponent(cleanPath)}`;
+  // If the current path is one of the auth pages, send them home instead
+  if (
+    cleanPath.includes("/login") ||
+    cleanPath.includes("/login.html") ||
+    cleanPath.includes("/register") ||
+    cleanPath.includes("/register.html")
+  ) {
+    return "./index.html";
+  }
+
+  // If somehow empty, use homepage
+  return cleanPath || "./index.html";
+}
+
+if (loginLink) {
+  const cleanPath = getSafeRedirectPath();
+  loginLink.href = `./login.html?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
 if (signupLink) {
-  let cleanPath = location.pathname + location.search;
-  cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html\/TheFeywildVault/, "");
-  signupLink.href = `./register?redirect=${encodeURIComponent(cleanPath)}`;
+  const cleanPath = getSafeRedirectPath();
+  signupLink.href = `./register.html?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
   // Toggle dropdown menu

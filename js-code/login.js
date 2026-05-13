@@ -16,17 +16,24 @@ loginForm.addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
-   if (res.ok) {
-  const params = new URLSearchParams(window.location.search);
-  const redirectParam = params.get("redirect");
+    if (res.ok) {
+      const params = new URLSearchParams(window.location.search);
+      const redirectParam = params.get("redirect");
 
-  // If a redirect param is present, use it as-is.
-  // Otherwise send the user to the main page inside /TheFeywildVault.
-  const redirectUrl = redirectParam || "/TheFeywildVault/index.html";
+      let redirectUrl = redirectParam || "./index.html";
 
-  window.location.href = redirectUrl;
+      if (
+        redirectUrl.includes("/login") ||
+        redirectUrl.includes("/login.html") ||
+        redirectUrl.includes("/register") ||
+        redirectUrl.includes("/register.html")
+      ) {
+        redirectUrl = "./index.html";
+      }
 
-} else {
+      window.location.href = redirectUrl;
+      
+    } else {
       alert(data.error || "Login failed");
       console.error("Login error:", data.error);
     }
@@ -36,13 +43,21 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const registered = params.get("registered");
-    if (registered === "1") {
-      const successMsg = document.getElementById("registrationSuccess");
-      if (successMsg) {
-        successMsg.classList.remove("hidden");
-      }
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const redirectParam = params.get("redirect");
+
+  const registered = params.get("registered");
+  if (registered === "1") {
+    const successMsg = document.getElementById("registrationSuccess");
+    if (successMsg) {
+      successMsg.classList.remove("hidden");
     }
-  });
+  }
+
+  const registerLink = document.getElementById("registerLink");
+  if (registerLink) {
+    const targetRedirect = redirectParam || "./index.html";
+    registerLink.href = `./register.html?redirect=${encodeURIComponent(targetRedirect)}`;
+  }
+});
