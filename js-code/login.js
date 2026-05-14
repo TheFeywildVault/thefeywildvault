@@ -20,7 +20,7 @@ loginForm.addEventListener("submit", async (e) => {
       const params = new URLSearchParams(window.location.search);
       const redirectParam = params.get("redirect");
 
-      let redirectUrl = redirectParam || "./index.html";
+      let redirectUrl = redirectParam || "/index.html";
 
       if (
         redirectUrl.includes("/login") ||
@@ -28,11 +28,10 @@ loginForm.addEventListener("submit", async (e) => {
         redirectUrl.includes("/register") ||
         redirectUrl.includes("/register.html")
       ) {
-        redirectUrl = "./index.html";
+        redirectUrl = "/index.html";
       }
 
       window.location.href = redirectUrl;
-      
     } else {
       alert(data.error || "Login failed");
       console.error("Login error:", data.error);
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const registerLink = document.getElementById("registerLink");
   if (registerLink) {
-    const targetRedirect = redirectParam || "./index.html";
-    registerLink.href = `./register.html?redirect=${encodeURIComponent(targetRedirect)}`;
+    const targetRedirect = redirectParam || "/index.html";
+    registerLink.href = `/register.html?redirect=${encodeURIComponent(targetRedirect)}`;
   }
 });

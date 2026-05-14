@@ -17,33 +17,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   const courierLink = document.getElementById("courierLink");
 
 function getSafeRedirectPath() {
-  let cleanPath = location.pathname + location.search;
+  let cleanPath = window.location.pathname + window.location.search;
 
-  // Remove internal cPanel path if Apache leaks it
+  
   cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html/, "");
 
-  // If the current path is one of the auth pages, send them home instead
+
   if (
     cleanPath.includes("/login") ||
     cleanPath.includes("/login.html") ||
     cleanPath.includes("/register") ||
     cleanPath.includes("/register.html")
   ) {
-    return "./index.html";
+    return "/index.html";
   }
 
-  // If somehow empty, use homepage
-  return cleanPath || "./index.html";
+  return cleanPath || "/index.html";
 }
 
 if (loginLink) {
   const cleanPath = getSafeRedirectPath();
-  loginLink.href = `./login.html?redirect=${encodeURIComponent(cleanPath)}`;
+  loginLink.href = `/login.html?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
 if (signupLink) {
   const cleanPath = getSafeRedirectPath();
-  signupLink.href = `./register.html?redirect=${encodeURIComponent(cleanPath)}`;
+  signupLink.href = `/register.html?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
   // Toggle dropdown menu

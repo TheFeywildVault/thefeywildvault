@@ -28,7 +28,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     }
 
     const params = new URLSearchParams(window.location.search);
-    const redirectParam = params.get("redirect") || "./index.html";
+    const redirectParam = params.get("redirect") || "/index.html";
 
     window.location.href = `./login.html?registered=1&redirect=${encodeURIComponent(redirectParam)}`;
   } catch (err) {
