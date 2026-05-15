@@ -30,7 +30,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     const params = new URLSearchParams(window.location.search);
     const redirectParam = params.get("redirect") || "/index.html";
 
-    window.location.href = `./login.html?registered=1&redirect=${encodeURIComponent(redirectParam)}`;
+    window.location.href = `./login?registered=1&redirect=${encodeURIComponent(redirectParam)}`;
   } catch (err) {
     alert("Network error: " + err.message);
   }
@@ -43,6 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginLink = document.getElementById("loginLink");
   if (loginLink) {
     const targetRedirect = redirectParam || "./index.html";
-    loginLink.href = `./login.html?redirect=${encodeURIComponent(targetRedirect)}`;
+    loginLink.href = `./login?redirect=${encodeURIComponent(targetRedirect)}`;
   }
 });

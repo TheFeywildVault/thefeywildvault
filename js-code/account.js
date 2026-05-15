@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function getSafeRedirectPath() {
   let cleanPath = window.location.pathname + window.location.search;
 
-  
+
   cleanPath = cleanPath.replace(/\/home\d+\/[^/]+\/public_html/, "");
 
 
@@ -37,12 +37,12 @@ function getSafeRedirectPath() {
 
 if (loginLink) {
   const cleanPath = getSafeRedirectPath();
-  loginLink.href = `/login.html?redirect=${encodeURIComponent(cleanPath)}`;
+  loginLink.href = `/login?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
 if (signupLink) {
   const cleanPath = getSafeRedirectPath();
-  signupLink.href = `/register.html?redirect=${encodeURIComponent(cleanPath)}`;
+  signupLink.href = `/register?redirect=${encodeURIComponent(cleanPath)}`;
 }
 
   // Toggle dropdown menu

@@ -57,6 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const registerLink = document.getElementById("registerLink");
   if (registerLink) {
     const targetRedirect = redirectParam || "/index.html";
-    registerLink.href = `/register.html?redirect=${encodeURIComponent(targetRedirect)}`;
+    registerLink.href = `/register?redirect=${encodeURIComponent(targetRedirect)}`;
   }
 });
