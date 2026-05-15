@@ -6,6 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const path = require('path');
+const siteStatsRoutes = require("./routes/siteStats");
 
 const app = express();
 
@@ -109,7 +110,7 @@ app.use('/api/friends', require('./routes/friends'));
 app.use('/api/courier', require('./routes/courier'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/chaos', require('./routes/chaos'));
-
+app.use("/api/site-stats", siteStatsRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, '../')));

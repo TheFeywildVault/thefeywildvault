@@ -1,26 +1,59 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const gifContainer = document.getElementById('gifDisplayContainer');
-  const generateButton = document.getElementById('generateButton');
+document.addEventListener("DOMContentLoaded", () => {
+  const generateButton = document.getElementById("generateButton");
+  const countDisplay = document.getElementById("itemGenerationCount");
+  const duplicateDisplays = document.querySelectorAll(".itemGenerationCountDuplicate");
 
-  generateButton.addEventListener('click', () => {
-      // Get button dimensions and position
-      const buttonRect = generateButton.getBoundingClientRect();
-      const gifWidth = gifContainer.offsetWidth;
+  function updateCountText(count) {
+    const formattedCount = Number(count || 0).toLocaleString();
 
-      // Calculate position
-      const topPosition = buttonRect.bottom + window.scrollY - 980; // Adjusted closer to the button
-      const leftPosition = buttonRect.left + buttonRect.width / 2 - gifWidth / 2; // Centered horizontally
+    if (countDisplay) {
+      countDisplay.textContent = formattedCount;
+    }
 
-      // Set the calculated position
-      gifContainer.style.top = `${topPosition}px`;
-      gifContainer.style.left = `${Math.max(leftPosition, 0)}px`; // Ensure it doesn't go off-screen on small screens
+    duplicateDisplays.forEach(display => {
+      display.textContent = formattedCount;
+    });
+  }
 
-      // Show the GIF
-      gifContainer.classList.remove('hidden');
+  async function loadItemGenerationCount() {
+    try {
+      const response = await fetch("/api/site-stats/items-generated");
+      const data = await response.json();
 
-      // Hide the GIF after 1 second
-      setTimeout(() => {
-          gifContainer.classList.add('hidden');
-      }, 1000);
-  });
+      if (data.success) {
+        updateCountText(data.itemsGenerated);
+      }
+    } catch (error) {
+      console.error("Failed to load item generation count:", error);
+    }
+  }
+
+  async function incrementItemGenerationCount() {
+    try {
+      const runCountSelect = document.getElementById("runCount");
+      const quantity = parseInt(runCountSelect?.value, 10) || 1;
+
+      const response = await fetch("/api/site-stats/items-generated/increment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ quantity })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        updateCountText(data.itemsGenerated);
+      }
+    } catch (error) {
+      console.error("Failed to increment item generation count:", error);
+    }
+  }
+
+  loadItemGenerationCount();
+
+  if (generateButton) {
+    generateButton.addEventListener("click", incrementItemGenerationCount);
+  }
 });

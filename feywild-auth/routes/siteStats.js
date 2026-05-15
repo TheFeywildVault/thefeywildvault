@@ -1,37 +1,62 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/User');
 
-// Middleware to require login
-function requireLogin(req, res, next) {
-  if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
-  next();
-}
+const SiteStats = require("../models/SiteStats");
 
-// Add a chaos effect
-router.post('/add', requireLogin, async (req, res) => {
-  const { name, effect, duration } = req.body;
-  if (!name || !effect) return res.status(400).json({ error: 'Missing effect data' });
-
+// GET current global item generation count
+router.get("/items-generated", async (req, res) => {
   try {
-    const user = await User.findById(req.session.userId);
-    user.chaosEffects.push({ name, effect, duration });
-    await user.save();
-    res.json({ success: true, chaosEffects: user.chaosEffects });
-  } catch (err) {
-    console.error('Add chaos effect error:', err);
-    res.status(500).json({ error: 'Server error' });
+    const stats = await SiteStats.findOneAndUpdate(
+      { key: "global" },
+      { $setOnInsert: { itemsGenerated: 0 } },
+      {
+        new: true,
+        upsert: true
+      }
+    );
+
+    res.json({
+      success: true,
+      itemsGenerated: stats.itemsGenerated
+    });
+  } catch (error) {
+    console.error("Error fetching item generation count:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch item generation count"
+    });
   }
 });
 
-// Get all chaos effects for current user
-router.get('/all', requireLogin, async (req, res) => {
+// POST increment global item generation count
+router.post("/items-generated/increment", async (req, res) => {
   try {
-    const user = await User.findById(req.session.userId).select('chaosEffects');
-    res.json({ chaosEffects: user.chaosEffects || [] });
-  } catch (err) {
-    console.error('Get chaos effects error:', err);
-    res.status(500).json({ error: 'Server error' });
+    const quantity = Math.max(1, parseInt(req.body.quantity, 10) || 1);
+
+    const stats = await SiteStats.findOneAndUpdate(
+      { key: "global" },
+      { 
+        $inc: { itemsGenerated: quantity },
+        $setOnInsert: { key: "global" }
+      },
+      {
+        new: true,
+        upsert: true
+      }
+    );
+
+    res.json({
+      success: true,
+      itemsGenerated: stats.itemsGenerated
+    });
+  } catch (error) {
+    console.error("Error incrementing item generation count:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to increment item generation count"
+    });
   }
 });
 
