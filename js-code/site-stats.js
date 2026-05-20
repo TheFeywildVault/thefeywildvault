@@ -1,23 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
-  const countDisplay = document.getElementById("itemGenerationCount");
-  const duplicateDisplays = document.querySelectorAll(".itemGenerationCountDuplicate");
+  const countDisplays = document.querySelectorAll(".itemGenerationCount");
 
-  function updateCountText(count) {
-    const formattedCount = Number(count || 0).toLocaleString();
+  const API_BASE =
+    window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+      ? "http://localhost:3000"
+      : "https://api.thefeywildvault.com";
 
-    if (countDisplay) {
-      countDisplay.textContent = formattedCount;
-    }
+function updateCountText(count) {
+  const formattedCount = Number(count || 0).toLocaleString();
 
-    duplicateDisplays.forEach(display => {
-      display.textContent = formattedCount;
-    });
-  }
+  countDisplays.forEach(display => {
+    display.textContent = formattedCount;
+  });
+}
 
   async function loadItemGenerationCount() {
     try {
-      const response = await fetch("/api/site-stats/items-generated");
+      const response = await fetch(`${API_BASE}/api/site-stats/items-generated`, {
+        method: "GET",
+        credentials: "include"
+      });
+
       const data = await response.json();
 
       if (data.success) {
@@ -33,8 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const runCountSelect = document.getElementById("runCount");
       const quantity = parseInt(runCountSelect?.value, 10) || 1;
 
-      const response = await fetch("/api/site-stats/items-generated/increment", {
+      const response = await fetch(`${API_BASE}/api/site-stats/items-generated/increment`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },

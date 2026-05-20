@@ -154,26 +154,32 @@
   <!-- HERO SECTION -->
   <section class="bg-gradient-to-b from-green-200/30 to-transparent dark:from-green-700/10 pb-8 text-center">
 
-      <!-- SCROLLING ANNOUNCEMENT BANNER -->
-  <div class="vault-ticker mb-12" aria-label="The Feywild Vault announcements">
-    <div class="vault-ticker__track">
-      <div class="vault-ticker__content">
-        <span>✦ Create wondrous items your players will definitely misuse</span>
-        <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
-        <span>✦ The Vault has forged <strong id="itemGenerationCount">0</strong> magic items</span>
-        <span>✦ Loot tables are good. Magical chaos is better</span>
-        <span>✦ Discover treasures lost, stolen, forged, or probably haunted</span>
-      </div>
+  <!-- SCROLLING ANNOUNCEMENT BANNER -->
+<div class="vault-ticker mb-12" aria-label="The Feywild Vault announcements">
+  <div class="vault-ticker__track">
 
-      <div class="vault-ticker__content" aria-hidden="true">
-        <span>✦ Create wondrous items your players will definitely misuse</span>
-        <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
-        <span>✦ The Vault has forged <strong id="itemGenerationCount">0</strong> magic items</span>
-        <span>✦ Loot tables are good. Magical chaos is better</span>
-        <span>✦ Discover treasures lost, stolen, forged, or probably haunted</span>
-      </div>
+    <!-- Main readable ticker content -->
+    <div class="vault-ticker__content">
+      <span>✦ Create wondrous items your players will definitely misuse</span>
+      <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+      <span>✦ The Vault has forged <strong class="itemGenerationCount">0</strong> magic items</span>
+      <span>✦ Loot tables are good. Magical chaos is better</span>
+      <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+      <span>✦ Discover treasures lost, stolen, forged, or probably haunted</span>
     </div>
+
+    <!-- Duplicate visual copy for seamless scrolling -->
+    <div class="vault-ticker__content" aria-hidden="true">
+      <span>✦ Create wondrous items your players will definitely misuse</span>
+      <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+      <span>✦ The Vault has forged <strong class="itemGenerationCount">0</strong> magic items</span>
+      <span>✦ Loot tables are good. Magical chaos is better</span>
+      <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+      <span>✦ Discover treasures lost, stolen, forged, or probably haunted</span>
+    </div>
+
   </div>
+</div>
     
     <div class="container mx-auto px-4">
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
@@ -744,7 +750,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="/js-code/item-toggle-button.js" defer></script>
 <script src="/js-code/item-filter-tooltip.js" defer></script>
 <script src="/js-code/item-type-selection.js" defer></script>
-<script src="/js-code/site-stats.js" defer></script>
+<script src="/js-code/site-stats.js?v=2" defer></script>
 <script src="/js-code/favicon.js" defer></script>
 
 </body>

@@ -137,17 +137,19 @@
     <div class="vault-ticker__track">
       <div class="vault-ticker__content">
         <span>✦ Summon monsters for your next combat</span>
-        <span>✦ Track monsters by CR, type, biome, speed, and more</span>
         <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+        <span>✦ Track monsters by CR, type, biome, speed, and more</span>
         <span>✦ BEWARE: some creatures bite, bargain, or both</span>
+        <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
         <span>✦ Generate the perfect threat for your next session</span>
       </div>
 
       <div class="vault-ticker__content" aria-hidden="true">
         <span>✦ Summon monsters for your next combat</span>
-        <span>✦ Track monsters by CR, type, biome, speed, and more</span>
         <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
+        <span>✦ Track monsters by CR, type, biome, speed, and more</span>
         <span>✦ BEWARE: some creatures bite, bargain, or both</span>
+        <span>✦ Support us on <a href="https://www.patreon.com/TheFeywildVault?utm_campaign=creatorshare_creator">Patreon</a></span>
         <span>✦ Generate the perfect threat for your next session</span>
       </div>
     </div>
@@ -176,17 +178,82 @@
     <div class="order-2 md:order-1">
       <div class="flex flex-col gap-4">
 
-        <!-- Generate Monster -->
-        <button
-          id="generateMonsterButton"
-          onclick="generateMonster()"
-          class="order-7 md:order-1 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
-          Generate Monster
-        </button>
+<!-- Generate Monster + Active Filter Info -->
+<div class="order-7 md:order-1 relative pt-6">
+
+  <!-- Active Filter Info Bubble -->
+  <div
+    id="monsterFilterInfoWrapper"
+    class="absolute -top-1 -left-1 z-40 group">
+
+    <button
+      type="button"
+      id="monsterFilterInfoButton"
+      class="px-2 py-1 rounded-full bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold shadow border border-purple-300">
+      0 matches
+    </button>
+
+    <div
+      id="monsterFilterInfoBubble"
+      class="hidden group-hover:block group-focus-within:block absolute left-0 top-8 z-50 w-80 max-h-96 overflow-y-auto p-3 rounded bg-gray-900 text-white text-xs leading-normal border border-purple-500 shadow-lg">
+      Loading monster matches...
+    </div>
+  </div>
+
+  <button
+    id="generateMonsterButton"
+    onclick="generateMonster()"
+    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+    Generate Monster
+  </button>
+</div>
+
+<!-- Monster Count Dropdown -->
+<div class="order-2 md:order-2 w-full">
+  <label for="monsterCount" class="block mb-1 text-sm font-medium">Monster Count:</label>
+  <select
+    id="monsterCount"
+    class="w-full px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+  </select>
+</div>
 
 <!-- Difficulty Dropdown -->
-        <div class="order-2 md:order-2 w-full" id="DiffDropdown">
-          <label class="block mb-1 text-sm font-medium">Difficulty:</label>
+        <div class="order-3 md:order-3 w-full" id="DiffDropdown">
+          <label class="mb-1 text-sm font-medium flex items-center gap-2">
+            Difficulty:
+
+            <span class="relative inline-flex group">
+              <button
+                type="button"
+                class="w-5 h-5 rounded-full border border-purple-400 text-purple-300 text-xs font-bold leading-none">
+                ?
+              </button>
+
+              <span
+                class="hidden group-hover:block group-focus-within:block absolute left-0 top-6 z-50 w-72 p-3 rounded bg-gray-900 text-white text-xs leading-normal border border-purple-500 shadow-lg">
+                <b>Difficulty Logic</b><br>
+                • If Player Level and Player Count are both selected, use difficulty selected or default to Easy 30%, Medium 50%, Hard 15%, Deadly 5%.<br><br>
+                • If both are "-", choose a random CR and ignore difficulty.<br><br>
+                • If Player Level is selected but Player Count is "-", assume 4 players and use difficulty, if not difficulty is set use random percentages above.<br><br>
+                • If Player Count is selected but Player Level is "-", choose a random CR and ignore difficulty.
+              </span>
+            </span>
+          </label>
           <button
             type="button"
             onclick="toggleDropdownDiff(this)"
@@ -213,30 +280,6 @@
           </div>
         </div>
 
-        <!-- Monster Count Dropdown -->
-<div class="order-3 md:order-3 w-full">
-  <label for="monsterCount" class="block mb-1 text-sm font-medium">Monster Count:</label>
-  <select
-    id="monsterCount"
-    class="w-full px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-  </select>
-</div>
-
         <!-- Player Level + Player Count -->
         <div class="order-4 md:order-4 grid grid-cols-2 gap-4">
           <!-- Player Level Dropdown -->
@@ -245,6 +288,7 @@
             <select
               id="plevel"
               class="w-full px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+              <option value="" selected>-</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -274,6 +318,7 @@
             <select
               id="pCount"
               class="w-full px-2 py-2 border rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+              <option value="" selected>-</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -819,7 +864,7 @@
 
 <script src="/js-code/patreon-access.js" defer></script>
 <script src="/js-code/rmig.js?v=3" defer></script>
-<script src="/js-code/account.js?v=6" defer></script>>
+<script src="/js-code/account.js?v=6" defer></script>
 <script src="/js-code/cr-range.js" defer></script>
 <script src="/js-code/rmonsters.js" defer></script>
 <script src="/js-code/monster-selection.js" defer></script>

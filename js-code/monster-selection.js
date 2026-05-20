@@ -48,6 +48,10 @@ function selectAllMonsterDropdown(containerId) {
   container.querySelectorAll(".dropdown-checkbox").forEach((checkbox) => {
     checkbox.checked = true;
   });
+
+  if (typeof updateMonsterFilterInfoBubble === "function") {
+    updateMonsterFilterInfoBubble();
+  }
 }
 
 function unselectAllMonsterDropdown(containerId) {
@@ -57,6 +61,10 @@ function unselectAllMonsterDropdown(containerId) {
   container.querySelectorAll(".dropdown-checkbox").forEach((checkbox) => {
     checkbox.checked = false;
   });
+
+  if (typeof updateMonsterFilterInfoBubble === "function") {
+    updateMonsterFilterInfoBubble();
+  }
 }
 
 // ===============================
