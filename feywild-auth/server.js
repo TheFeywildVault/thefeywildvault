@@ -11,7 +11,8 @@ const siteStatsRoutes = require("./routes/siteStats");
 const app = express();
 
 // ✅ Connect to MongoDB
-console.log("MONGO_URI:", process.env.MONGO_URI);
+console.log("MongoDB URI loaded:", !!process.env.MONGO_URI);
+console.log("Patreon redirect URI:", process.env.PATREON_REDIRECT_URI);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB'))

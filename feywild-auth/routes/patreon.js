@@ -5,7 +5,16 @@ const crypto = require('crypto'); // NEW: used to create secure state tokens
 
 const CLIENT_ID = process.env.PATREON_CLIENT_ID;
 const CLIENT_SECRET = process.env.PATREON_CLIENT_SECRET;
-const REDIRECT_URI = process.env.PATREON_REDIRECT_URI;
+
+function getPatreonRedirectUri() {
+  const uri = process.env.PATREON_REDIRECT_URI;
+
+  if (!uri) {
+    throw new Error("PATREON_REDIRECT_URI is missing");
+  }
+
+  return uri.trim();
+}
 
 // Helper: build authorize URL
 router.get('/link', (req, res) => {
@@ -14,21 +23,23 @@ router.get('/link', (req, res) => {
 
   const scope = 'identity identity.memberships';
 
-  const params = new URLSearchParams({
-    response_type: 'code',
-    client_id: process.env.PATREON_CLIENT_ID,
-    redirect_uri: process.env.PATREON_REDIRECT_URI,
-    scope,
-    state
-  });
+const redirectUri = getPatreonRedirectUri();
 
-  const authorizeUrl = `https://www.patreon.com/oauth2/authorize?${params.toString()}`;
+const params = new URLSearchParams({
+  response_type: 'code',
+  client_id: process.env.PATREON_CLIENT_ID,
+  redirect_uri: redirectUri,
+  scope,
+  state
+});
 
-  console.log('Starting Patreon OAuth:', {
-    sessionID: req.sessionID,
-    patreonState: req.session.patreonState,
-    redirectUri: process.env.PATREON_REDIRECT_URI
-  });
+const authorizeUrl = `https://www.patreon.com/oauth2/authorize?${params.toString()}`;
+
+console.log('Starting Patreon OAuth:', {
+  sessionID: req.sessionID,
+  patreonState: req.session.patreonState,
+  redirectUri
+});
 
   req.session.save((err) => {
     if (err) {
@@ -46,6 +57,14 @@ router.get('/callback', async (req, res) => {
     const { code, state } = req.query;
     if (!code) return res.status(400).send('Missing code');
 
+    console.log('Patreon callback received:', {
+      sessionID: req.sessionID,
+      receivedState: state,
+      expectedState: req.session.patreonState,
+      redirectUri: getPatreonRedirectUri(),
+      hasUserId: !!req.session.userId
+    });
+
     // Validate state
     if (!state || !req.session.patreonState || state !== req.session.patreonState) {
       console.warn('Patreon state mismatch', { received: state, expected: req.session.patreonState });
@@ -59,12 +78,12 @@ router.get('/callback', async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        code,
-        grant_type: 'authorization_code',
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        redirect_uri: REDIRECT_URI
-      })
+      code,
+      grant_type: 'authorization_code',
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: getPatreonRedirectUri()
+    })
     });
     const tokenJson = await tokenRes.json();
     if (!tokenJson.access_token) {
