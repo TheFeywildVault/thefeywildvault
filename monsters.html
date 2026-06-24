@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./style/rmig.css">
   <link rel="stylesheet" href="./style/scrolls.css">
   <link rel="stylesheet" href="./style/cr-range.css">
+  <link rel="stylesheet" href="./style/homebrew-button.css">
   <link rel="stylesheet" href="./style/banner.css">
 <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -160,8 +161,9 @@
       Dr. Merrick Grimsby's Bestiary
     </h2>
 
-    <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">
-      Browse our detailed fieldguide to monsters of the multiverse and how best to befriend them, take them down, or simply run the other way.
+    <p class="text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
+      Browse our detailed fieldguide to monsters of the multiverse and how<br> best to befriend them, take them down, or simply run the other way.
+          <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new features, items, and generators created! 
     </p>
   </div>
 </section>
@@ -205,6 +207,14 @@
     onclick="generateMonster()"
     class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
     Generate Monster
+  </button>
+
+  <button
+    id="homebrewfilterButton"
+    type="button"
+    onclick="toggleHomebrew()"
+    class="official-content w-full text-white font-semibold py-2 px-4 rounded transition shadow-sm">
+    Official Content
   </button>
 </div>
 
@@ -644,7 +654,7 @@
   <div class="md:col-span-3">
   <div
     id="result"
-    class="hide-effect parchment-bg text-black p-4 rounded shadow-md w-full min-h-[350px] md:min-h-[900px]"
+    class="hide-effect parchment-bg text-black p-4 rounded shadow-md w-full min-h-[350px] md:min-h-[970px]"
     style="line-height: 1; text-indent: 2px;">
     <p id="placeholder-text" class="text-gray-500 italic text-md md:text-xl mt-32 md:mt-72">
       Click "Generate" to discover new monsters
@@ -706,7 +716,10 @@
       </div>
   
       <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
-        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+      <p>The Feywild Vault is an independent third-party toolset and is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC.
+        This work includes material taken from the <a href="https://dnd.wizards.com/resources/systems-reference-document">System Reference Document 5.1 (“SRD 5.1”)</a> by Wizards of the Coast LLC. 
+        The SRD 5.1 is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>.
+        The Feywild Vault is compatible with fifth edition / 5E compatible.</p>
       </div>
     </div>
   </footer>
@@ -866,6 +879,7 @@
 <script src="/js-code/rmig.js?v=3" defer></script>
 <script src="/js-code/account.js?v=6" defer></script>
 <script src="/js-code/cr-range.js" defer></script>
+<script src="/js-code/homebrew-button.js" defer></script>
 <script src="/js-code/rmonsters.js" defer></script>
 <script src="/js-code/monster-selection.js" defer></script>
 <script src="/js-code/favicon.js" defer></script>

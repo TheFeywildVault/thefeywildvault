@@ -1,0 +1,19 @@
+#homebrewfilterButton {
+  margin-top: 0.5rem;
+}
+
+#homebrewfilterButton.official-content {
+  background-color: #4b5563;
+}
+
+#homebrewfilterButton.official-content:hover {
+  background-color: #374151;
+}
+
+#homebrewfilterButton.official-homebrew {
+  background-color: #7e22ce;
+}
+
+#homebrewfilterButton.official-homebrew:hover {
+  background-color: #6b21a8;
+}

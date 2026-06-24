@@ -155,46 +155,42 @@
         <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-color-fade">
             The Fletched Fang
           </h2>
-      <p class="text-lg max-w-xl mx-auto text-gray-600 dark:text-gray-300">Projectiles to suite your every need, whether you are an expect archer with a bow or a crossbow.</p>
+      <p class="text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">Projectiles to suite your every need, whether you are an expect archer with a bow or a crossbow.
+              <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new features, items, and generators created! 
+      </p>
     </div>
   </section>
 
 <!-- TEXT INFO SECTION -->
 <section class="container mx-auto px-4 pb-6 text-left">
-  <!-- Mobile: accordion -->
-  <div class="md:hidden px-4">
+  <div class="px-4">
     <details class="border border-gray-300 dark:border-gray-700 rounded-lg p-4">
       <summary class="flex items-center justify-between cursor-pointer">
-        <span class="text-xl font-semibold">
+        <span class="text-xl md:text-2xl font-semibold">
           About Magic Ammunition
         </span>
+
         <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
-          Tap to expand
+          Tap / click to expand
         </span>
       </summary>
 
-      <div class="mt-3 text-gray-700 dark:text-gray-300">
+      <div class="mt-aside3 text-gray-700 dark:text-gray-300">
         <p>
           With the addition of magic ammunition, such as arrows and bolts, a common question might be
-          <i>"Can magical arrows also recieve the magic benefit from a magic Bow or Quiver?"</i><br>
-          <font color="green"><b>✓</b></font> Yes, magic projectiles fired from a bow with an additional magic effect will get the benefits of both.<br>
-          <font color="red"><b>✗</b></font> However, magic projectiles drawn from a quiver with an additional effect will not recieve ebenfits from both.
-          All magical Quiver effects specify that only nonmagic arrows may recieve it's bonus effect when the projectile is drawn.
+          <i>"Can magical arrows also receive the magic benefit from a magic bow or quiver?"</i>
+          <br>
+
+          <span class="text-green-500 font-bold">✓</span>
+          Yes, magic projectiles fired from a bow with an additional magic effect will get the benefits of both.
+          <br>
+
+          <span class="text-red-500 font-bold">✗</span>
+          However, magic projectiles drawn from a quiver with an additional effect will not receive benefits from both.
+          All magical quiver effects specify that only nonmagical arrows may receive its bonus effect when the projectile is drawn.
         </p>
       </div>
     </details>
-  </div>
-
-  <!-- Desktop / larger screens: original layout -->
-  <div class="hidden md:block md:col-span-3 px-4">
-    <h3 class="text-2xl font-semibold mb-2">About Magic Ammunition</h3>
-    <p class="text-gray-700 dark:text-gray-300">
-      With the addition of magic ammunition, such as arrows and bolts, a common question might be
-      <i>"Can magical arrows also recieve the magic benefit from a magic Bow or Quiver?"</i><br>
-      <font color="green"><b>✓</b></font> Yes, magic projectiles fired from a bow with an additional magic effect will get the benefits of both.<br>
-      <font color="red"><b>✗</b></font> However, magic projectiles drawn from a quiver with an additional effect will not recieve ebenfits from both.
-      All magical Quiver effects specify that only nonmagic arrows may recieve it's bonus effect when the projectile is drawn.
-    </p>
   </div>
 </section>
 
@@ -202,14 +198,14 @@
 <section class="container mx-auto px-4 py-4 grid grid-cols-1 md:grid-cols-4 gap-4">
       
 <!-- Select All/Unselect All Controls -->
-  <aside class="space-y-4">
+  <aside class="space-y-4 md:col-span-2 lg:col-span-1">
     
-   <div class="max-w-md p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex flex-col">
-
+   <div class="w-full max-w-none p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex flex-col space-y-4">
+    
 <!-- Generate Button full width -->
-<div class="mb-2 order-2 md:order-1">
-<button id="generateAmmoButton" onclick="generateammo()"
-          class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+<div class="mt-3 mb-2 order-2 md:order-1">
+  <button id="generateAmmoButton" onclick="generateammo()"
+    class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
     Generate Ammo
   </button>
 </div>
@@ -355,7 +351,10 @@
       </div>
   
       <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
-        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+       <p>The Feywild Vault is an independent third-party toolset and is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC.
+        This work includes material taken from the <a href="https://dnd.wizards.com/resources/systems-reference-document">System Reference Document 5.1 (“SRD 5.1”)</a> by Wizards of the Coast LLC. 
+        The SRD 5.1 is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>.
+        The Feywild Vault is compatible with fifth edition / 5E compatible.</p>
       </div>
     </div>
   </footer>

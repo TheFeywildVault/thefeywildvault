@@ -132,6 +132,7 @@ router.get('/callback', async (req, res) => {
     user.patreon.tierName = tierNames[tierId] || null;
     user.patreon.isMember = !!tierNames[tierId];
     user.patreon.tierId = tierId || null;
+    user.patreon.patreonName = identity?.data?.attributes?.full_name || null;
    
     await user.save();
 
@@ -211,23 +212,54 @@ router.get("/status", async (req, res) => {
 
 
 router.post('/unlink', async (req, res) => {
-  if (!req.session.userId) return res.status(401).json({ error: 'Not logged in' });
+  try {
+    if (!req.session.userId) {
+      return res.status(401).json({ error: 'Not logged in' });
+    }
 
-  const user = await User.findById(req.session.userId);
-  if (!user) return res.status(404).json({ error: 'User not found' });
+    const user = await User.findById(req.session.userId);
 
-  user.patreon = {
-  isLinked: false,
-  tierId: null,
-  tierName: null,
-  isMember: false
-};
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-  await user.save();
+    user.patreon = {
+      isLinked: false,
+      tierId: null,
+      tierName: null,
+      patreonName: null,
+      isMember: false
+    };
 
-  req.session.user.patreon = user.patreon;
+    await user.save();
 
-  return res.json({ success: true });
+    if (req.session.user) {
+      req.session.user.patreon = {
+        isLinked: false,
+        tierId: null,
+        tierName: null,
+        patreonName: null,
+        isMember: false
+      };
+    }
+
+    return res.json({
+      success: true,
+      patreon: {
+        isLinked: false,
+        tierId: null,
+        tierName: null,
+        patreonName: null,
+        isMember: false
+      }
+    });
+  } catch (err) {
+    console.error('Patreon unlink error:', err);
+    return res.status(500).json({
+      error: 'Failed to unlink Patreon',
+      detail: err.message
+    });
+  }
 });
 
 module.exports = router;

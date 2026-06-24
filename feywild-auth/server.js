@@ -20,10 +20,9 @@ mongoose.connect(process.env.MONGO_URI)
     console.error(err);
   });
 
-
 //
 // =========================
-//        CORS (FIXED)
+//        CORS
 // =========================
 //
 const allowedOrigins = [
@@ -32,25 +31,26 @@ const allowedOrigins = [
   'http://localhost:3000'
 ];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    // allow mobile apps / curl / server-to-server
-    if (!origin) return callback(null, true); 
+    // Allow requests with no origin, such as curl, Postman, or server-to-server requests
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
 
-    // ❗ Don't throw — just reject silently with no CORS headers
     return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
-}));
+};
 
-// Preflight MUST run before JSON/session
-app.options('*', cors());
+app.use(cors(corsOptions));
+
+// Preflight must use the same CORS options
+app.options('*', cors(corsOptions));
 
 
 // =========================
@@ -59,6 +59,7 @@ app.options('*', cors());
 app.use(express.json());
 
 app.set("trust proxy", 1);
+
 
 // =========================
 // Session Configuration
@@ -72,6 +73,7 @@ app.use(session({
     secure: true,
     httpOnly: true,
     sameSite: 'none',
+    domain: '.thefeywildvault.com',
     maxAge: 1000 * 60 * 60 * 24
   }
 }));
@@ -84,22 +86,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-
-  const allowedOrigins = [
-    'https://thefeywildvault.com',
-    'https://www.thefeywildvault.com',
-    'http://localhost:3000'
-  ];
-
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-    res.header("Access-Control-Allow-Credentials", "true");
-  }
-
-  next();
-});
 
 // =========================
 // API Routes
@@ -111,6 +97,7 @@ app.use('/api/courier', require('./routes/courier'));
 app.use('/api/inventory', require('./routes/inventory'));
 app.use('/api/chaos', require('./routes/chaos'));
 app.use("/api/site-stats", siteStatsRoutes);
+
 
 // Static files
 app.use(express.static(path.join(__dirname, '../')));

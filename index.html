@@ -178,7 +178,7 @@
         </h2>
       <p class="text-lg max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
             Exciting magic items and other generators for your tabletop adventures.
-            <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new items aded and the creation of new random generators!
+           <br>Support us on <a href="https://www.patreon.com/c/TheFeywildVault" style="color: rgb(0, 117, 250);">Patreon</a> to see new features, items, and generators created!
           </p>
     </div>
   </section>
@@ -303,7 +303,10 @@
       </div>
   
       <div class="border-t border-gray-300 dark:border-gray-700 pt-4 text-center text-xs">
-        <p>© 2025 The Feywild Vault. All rights reserved.</p>
+        <p>The Feywild Vault is an independent third-party toolset and is not affiliated with, endorsed, sponsored, or specifically approved by Wizards of the Coast LLC.
+        This work includes material taken from the <a href="https://dnd.wizards.com/resources/systems-reference-document">System Reference Document 5.1 (“SRD 5.1”)</a> by Wizards of the Coast LLC. 
+        The SRD 5.1 is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>.
+        The Feywild Vault is compatible with fifth edition / 5E compatible.</p>
       </div>
     </div>
   </footer>
@@ -426,28 +429,41 @@
 </div>
 
 <script>
-  function toggleDropdown(id) {
-    const dropdown = document.getElementById(id);
-    dropdown.classList.toggle('hidden');
-  }
+
+function toggleDropdown(id) {
+  const dropdown = document.getElementById(id);
+  dropdown.classList.toggle('hidden');
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const unlinkBtn = document.getElementById("patreonUnlinkBtn");
   if (!unlinkBtn) return;
 
   unlinkBtn.addEventListener("click", async () => {
-    const res = await fetch("/api/patreon/unlink", { method: "POST" });
-    const json = await res.json();
+    try {
+      const res = await fetch("https://api.thefeywildvault.com/api/patreon/unlink", {
+        method: "POST",
+        credentials: "include"
+      });
 
-    if (json.success) {
+      const json = await res.json();
+
+      if (!res.ok || !json.success) {
+        console.error("Patreon unlink failed:", json);
+        alert(json.error || "Failed to unlink Patreon");
+        return;
+      }
+
       window.location.reload();
-    } else {
-      alert("Failed to unlink Patreon");
+    } catch (err) {
+      console.error("Patreon unlink request failed:", err);
+      alert("Failed to unlink Patreon. Please try again.");
     }
   });
 });
 
 </script>
+
 <script src="/js-code/patreon-access.js" defer></script>
 <script src="/js-code/rmig.js?v=3" defer></script>
 <script src="/js-code/account.js?v=6" defer></script>

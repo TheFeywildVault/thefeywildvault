@@ -40,11 +40,12 @@ const userSchema = new mongoose.Schema({
   }
 ],
   patreon: {
-      isLinked: {type: Boolean, default: false},                           // optional: your creator campaign id
-      tierId: { type: String, default: null },
-      tierName: { type: String, default: null }, 
-      patreonName: { type: String, default: null }                              // optional: Patreon tier id
-    }
+    isLinked: { type: Boolean, default: false },
+    tierId: { type: String, default: null },
+    tierName: { type: String, default: null },
+    patreonName: { type: String, default: null },
+    isMember: { type: Boolean, default: false }
+}
 });
 
 module.exports = mongoose.model('User', userSchema);

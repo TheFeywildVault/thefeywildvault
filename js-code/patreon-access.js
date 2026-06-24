@@ -34,7 +34,12 @@ function patreonReady() {
 
  window.PatreonOverrideRules = {
   "VaultGuardian": { save: true, share: true },
-  "havamere": { save: true, share: true }
+  "Havamere411": { save: true, share: true },
+  "Madmin": { save: true, share: true },
+  "Obsidian719": { save: true, share: true },
+  "stinkybrandon": { save: true, share: true },
+  "j3d1j4m13": { save: true, share: true },
+  "bonmot57@gmail.com": { save: true, share: true }
 };
 
 // -------------------------
