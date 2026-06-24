@@ -9,7 +9,6 @@ const REDIRECT_URI = process.env.PATREON_REDIRECT_URI;
 
 // Helper: build authorize URL
 router.get('/link', (req, res) => {
-  // generate a cryptographically-random state token and save to session
   const state = crypto.randomBytes(24).toString('hex');
   req.session.patreonState = state;
 
@@ -22,7 +21,23 @@ router.get('/link', (req, res) => {
     scope,
     state
   });
-  return res.redirect(`https://www.patreon.com/oauth2/authorize?${params.toString()}`);
+
+  const authorizeUrl = `https://www.patreon.com/oauth2/authorize?${params.toString()}`;
+
+  console.log('Starting Patreon OAuth:', {
+    sessionID: req.sessionID,
+    patreonState: req.session.patreonState,
+    redirectUri: process.env.PATREON_REDIRECT_URI
+  });
+
+  req.session.save((err) => {
+    if (err) {
+      console.error('Failed to save Patreon OAuth state:', err);
+      return res.status(500).send('Could not start Patreon linking. Please try again.');
+    }
+
+    return res.redirect(authorizeUrl);
+  });
 });
 
 // Callback: exchange code -> token, then fetch identity/membership and store
