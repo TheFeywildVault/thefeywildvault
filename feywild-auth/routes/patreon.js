@@ -5,6 +5,7 @@ const crypto = require('crypto'); // NEW: used to create secure state tokens
 
 const CLIENT_ID = process.env.PATREON_CLIENT_ID;
 const CLIENT_SECRET = process.env.PATREON_CLIENT_SECRET;
+const FRONTEND_URL = (process.env.FRONTEND_URL || 'https://thefeywildvault.com').replace(/\/$/, '');
 
 function getPatreonRedirectUri() {
   const uri = process.env.PATREON_REDIRECT_URI;
@@ -149,9 +150,17 @@ router.get('/callback', async (req, res) => {
         isMember: !!tierNames[tierId]
       };
       // Clear state
-      delete req.session.patreonState;
-      // Redirect to login page with a flag telling the front-end to show a "finish linking" notice
-      return res.redirect('/login.html?finishPatreon=1');
+delete req.session.patreonState;
+
+// Redirect to the frontend login page with a flag telling the front-end to finish linking
+return req.session.save((err) => {
+  if (err) {
+    console.error('Failed to save pending Patreon session:', err);
+    return res.status(500).send('Could not finish Patreon linking. Please try again.');
+  }
+
+  return res.redirect(`${FRONTEND_URL}/login?finishPatreon=1`);
+});
     }
 
     // Save to logged-in user record
@@ -184,10 +193,18 @@ router.get('/callback', async (req, res) => {
     };
     
     // Clear saved state
-    delete req.session.patreonState;
+delete req.session.patreonState;
 
-    // Redirect back to a front-end page which will call /api/patreon/status to update UI
-    return res.redirect('/?patreon=linked');
+// Redirect back to the frontend page which will call /api/patreon/status to update UI
+return req.session.save((err) => {
+  if (err) {
+    console.error('Failed to save Patreon-linked session:', err);
+    return res.status(500).send('Patreon linked, but session could not be saved. Please log in again.');
+  }
+
+  return res.redirect(`${FRONTEND_URL}/?patreon=linked`);
+});
+    
   } catch (err) {
     console.error('Patreon callback error', err);
     return res.status(500).json({ error: 'Patreon callback failure', detail: err.message });

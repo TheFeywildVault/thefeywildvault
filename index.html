@@ -316,13 +316,28 @@
   <!-- MODAL -->
   <div id="accountModal"
      class="fixed inset-0 bg-black/50 z-50 hidden">
-  <div class="flex items-center justify-center h-full w-full">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md relative">
-      <button id="closeAccountModal"
-              class="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
-        &times;
-      </button>
-      <h2 class="text-xl font-semibold mb-4">Account Settings</h2>
+  <div class="flex h-full w-full items-start justify-center p-4 sm:p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md max-h-[calc(100vh-2rem)] flex flex-col overflow-hidden">
+
+      <!-- Fixed modal header -->
+      <div class="flex-none border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 py-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold">Account Settings</h2>
+
+          <button id="closeAccountModal"
+                  type="button"
+                  class="text-gray-600 dark:text-gray-300 hover:text-red-500 text-lg font-bold">
+            &times;
+          </button>
+        </div>
+
+        <div id="patreonAccessNotice"
+             class="hidden mt-2 text-sm font-semibold text-purple-300">
+        </div>
+      </div>
+
+      <!-- Scrollable modal body -->
+      <div class="flex-1 overflow-y-auto px-6 py-4">
 
   <div class="mb-4">
     <label class="block text-sm mb-1 text-gray-700 dark:text-gray-200">Profile Picture</label>
@@ -376,6 +391,7 @@
   </div>
 
 
+      </div>
     </div>
   </div>
 </div>
